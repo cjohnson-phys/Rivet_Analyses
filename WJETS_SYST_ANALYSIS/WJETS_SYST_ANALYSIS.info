@@ -1,0 +1,27 @@
+Name: WJETS_SYST_ANALYSIS
+Year: 2013
+Summary: W+jets production at 8 TeV
+Experiment: ATLAS
+Collider: LHC
+InspireID: 0000000
+Status: UNVALIDATED
+Authors:
+ - Christian Johnson <christian.johnson@cern.ch>
+#References:
+# - arXiv:1201.1276 [hep-ex] (This is a modified version of the analysis here)
+RunInfo:
+  W+jet events in either the electron or the muon decay channel (but not both).
+NumEvents: 500000
+Beams: [p+, p+]
+Energies: [8000]
+PtCuts: [0]
+NeedCrossSection: True
+Description:
+  'Differential cross-sections of properties of the four leading jets in
+  $W$+jets production, using mc12_8TeV_Sherpa. Observables
+  include jet multiplicities, $pT$, $H_T$, angular distances, and others.
+  All observables are available using jets with $pT>30$ and $pT>20$ GeV.
+  This is a modified version of the ATLAS_2012_I1083318 analysis.'
+ToDo:
+ - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
+
