@@ -353,3 +353,17 @@ RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/CutFlow
+Title=Cut Flow
+XLabel=
+YLabel=Events
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Weights
+Title=Distribution of Weights
+XLabel=
+YLabel=Weights
+LegendXPos=0.05
+# END PLOT
