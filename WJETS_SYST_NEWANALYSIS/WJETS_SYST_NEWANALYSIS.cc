@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/RivetAIDA.hh"
+//#include "Rivet/RivetAIDA.hh"
 #include "Rivet/Tools/Logging.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
@@ -36,17 +36,17 @@ namespace Rivet {
 
       FinalState fs;
       IdentifiedFinalState allleptons;
-      allleptons.acceptIdPair(ELECTRON);
-      allleptons.acceptIdPair(MUON);
+      allleptons.acceptIdPair(PID::ELECTRON);
+      allleptons.acceptIdPair(PID::MUON);
       std::vector<std::pair<double, double> > etaRanges;
-      etaRanges.push_back(make_pair(-2.5, 2.5));
-	  LeptonClusters leptons(fs, allleptons, 0.1, true, etaRanges, 15.0*GeV);		// pT_min of lepton is 15.0*GeV
+      etaRanges.push_back(make_pair(-2.4, 2.4));									// lepton |eta| < 2.4
+      LeptonClusters leptons(fs, allleptons, 0.1, true, etaRanges, 25.0*GeV);		// pT_min of lepton is 25.0*GeV
       addProjection(leptons, "leptons");
 
       // Leading neutrinos for Etmiss
       LeadingParticlesFinalState neutrinos(fs);
-      neutrinos.addParticleIdPair(NU_E);
-      neutrinos.addParticleIdPair(NU_MU);
+      neutrinos.addParticleIdPair(PID::NU_E);
+      neutrinos.addParticleIdPair(PID::NU_MU);
       neutrinos.setLeadingOnly(true);
       addProjection(neutrinos, "neutrinos");
 
@@ -60,137 +60,192 @@ namespace Rivet {
       addProjection(jets, "jets");
 
       for (size_t i=0; i<2; ++i) {
-		// New Histograms defined here (must book them here and define them in .plots file.)
-		string String = static_cast<ostringstream*>( &(ostringstream() << i+1) )->str();
+        // New Histograms defined here (must book them here and define them in .plots file.)
+        string String = static_cast<ostringstream*>( &(ostringstream() << i+1) )->str();
 		
-        _h_NJetExcl[i] = bookHistogram1D("NJetExcl_"+String,4,0,4);
-        _h_RatioNJetExcl[i] = bookDataPointSet("RatioNJetExcl_"+String,5,1,5);
-        _h_FirstJetPt_2jet[i] = bookHistogram1D("FirstJetPt_2jet_"+String,50,0.0,500.0);
-        _h_FirstJetPt_3jet[i] = bookHistogram1D("FirstJetPt_3jet_"+String,50,0.0,500.0);
-        _h_FirstJetPt_4jet[i] = bookHistogram1D("FirstJetPt_4jet_"+String,50,0.0,500.0);
-        _h_SecondJetPt_2jet[i] = bookHistogram1D("SecondJetPt_2jet_"+String,50,0.0,500.0);
-        _h_SecondJetPt_3jet[i] = bookHistogram1D("SecondJetPt_3jet_"+String,50,0.0,500.0);
-        _h_SecondJetPt_4jet[i] = bookHistogram1D("SecondJetPt_4jet_"+String,50,0.0,500.0);
-        _h_ThirdJetPt_3jet[i] = bookHistogram1D("ThirdJetPt_3jet_"+String,50,0.0,500.0);
-        _h_ThirdJetPt_4jet[i] = bookHistogram1D("ThirdJetPt_4jet_"+String,50,0.0,500.0);
-        _h_FourthJetPt_4jet[i] = bookHistogram1D("FourthJetPt_4jet_"+String,50,0.0,500.0);
-        _h_Ht_2jet[i] = bookHistogram1D("Ht_2jet_"+String,150,0.0,1500.0);
-        _h_Ht_3jet[i] = bookHistogram1D("Ht_3jet_"+String,150,0.0,1500.0);
-        _h_Ht_4jet[i] = bookHistogram1D("Ht_4jet_"+String,150,0.0,1500.0);
-        _h_Minv_2jet[i] = bookHistogram1D("Minv_2jet_"+String,150,0.0,1500.0);
-        _h_Minv_3jet[i] = bookHistogram1D("Minv_3jet_"+String,150,0.0,1500.0);
-        _h_Minv_4jet[i] = bookHistogram1D("Minv_4jet_"+String,150,0.0,1500.0);
-        _h_JetRapidity[i] = bookHistogram1D("JetRapidity_"+String,100,-5.0,5.0);
-        _h_DeltaYElecJet[i] = bookHistogram1D("DeltaYElecJet_"+String,140,-7.0,7.0);
-        _h_SumYElecJet[i] = bookHistogram1D("SumYElecJet_"+String,140,-7.0,7.0);
-        _h_DeltaR_2jet[i] = bookHistogram1D("DeltaR_2jet_"+String,40,0.0,10.0);
-        _h_DeltaY_2jet[i] = bookHistogram1D("DeltaY_2jet_"+String,140,-7.0,7.0);
-        _h_DeltaPhi_2jet[i] = bookHistogram1D("DeltaPhi_2jet_"+String,35,0,3.5);
-		_h_DijetMass_2jet[i] = bookHistogram1D("DijetMass_2jet_"+String,60,300.0,1500.0);
-		_h_DijetMass_3jet[i] = bookHistogram1D("DijetMass_3jet_"+String,60,300.0,1500.0);
-		_h_DijetMass_4jet[i] = bookHistogram1D("DijetMass_4jet_"+String,60,300.0,1500.0);
-		_h_AntiDijetMass_2jet[i] = bookHistogram1D("AntiDijetMass_2jet_"+String,75,0.0,1500.0);
-		_h_AntiDijetMass_3jet[i] = bookHistogram1D("AntiDijetMass_3jet_"+String,75,0.0,1500.0);
-		_h_AntiDijetMass_4jet[i] = bookHistogram1D("AntiDijetMass_4jet_"+String,75,0.0,1500.0);
-		_h_ThirdZep_3jet[i] = bookHistogram1D("ThirdZep_3jet_"+String,25,-5.0,5.0);
-		_h_ThirdZep_4jet[i] = bookHistogram1D("ThirdZep_4jet_"+String,25,-5.0,5.0);
-		_h_FourthZep_4jet[i] = bookHistogram1D("FourthZep_4jet_"+String,25,-5.0,5.0);
-		_h_AntiDijetEtaDiff_2jet[i] = bookHistogram1D("AntiDijetEtaDiff_2jet_"+String,50,0.0,10.0);
-		_h_AntiDijetEtaDiff_3jet[i] = bookHistogram1D("AntiDijetEtaDiff_3jet_"+String,50,0.0,10.0);
-		_h_AntiDijetEtaDiff_4jet[i] = bookHistogram1D("AntiDijetEtaDiff_4jet_"+String,50,0.0,10.0);
-		_h_AntiDijetPhiDiff_2jet[i] = bookHistogram1D("AntiDijetPhiDiff_2jet_"+String,20,-1.0,1.0);
-		_h_AntiDijetPhiDiff_3jet[i] = bookHistogram1D("AntiDijetPhiDiff_3jet_"+String,20,-1.0,1.0);
-		_h_AntiDijetPhiDiff_4jet[i] = bookHistogram1D("AntiDijetPhiDiff_4jet_"+String,20,-1.0,1.0);
+        _h_NJetExcl[i] = bookHisto1D("NJetExcl_"+String,4,0,4);
+        _h_RatioNJetExcl[i] = bookScatter2D("RatioNJetExcl_"+String,5,1,5);
+        _h_FirstJetPt_2jet[i] = bookHisto1D("FirstJetPt_2jet_"+String,50,0.0,500.0);
+        _h_FirstJetPt_3jet[i] = bookHisto1D("FirstJetPt_3jet_"+String,50,0.0,500.0);
+        _h_FirstJetPt_4jet[i] = bookHisto1D("FirstJetPt_4jet_"+String,50,0.0,500.0);
+        _h_SecondJetPt_2jet[i] = bookHisto1D("SecondJetPt_2jet_"+String,50,0.0,500.0);
+        _h_SecondJetPt_3jet[i] = bookHisto1D("SecondJetPt_3jet_"+String,50,0.0,500.0);
+        _h_SecondJetPt_4jet[i] = bookHisto1D("SecondJetPt_4jet_"+String,50,0.0,500.0);
+        _h_ThirdJetPt_3jet[i] = bookHisto1D("ThirdJetPt_3jet_"+String,50,0.0,500.0);
+        _h_ThirdJetPt_4jet[i] = bookHisto1D("ThirdJetPt_4jet_"+String,50,0.0,500.0);
+        _h_FourthJetPt_4jet[i] = bookHisto1D("FourthJetPt_4jet_"+String,50,0.0,500.0);
+        _h_Ht_2jet[i] = bookHisto1D("Ht_2jet_"+String,150,0.0,1500.0);
+        _h_Ht_3jet[i] = bookHisto1D("Ht_3jet_"+String,150,0.0,1500.0);
+        _h_Ht_4jet[i] = bookHisto1D("Ht_4jet_"+String,150,0.0,1500.0);
+        _h_Minv_2jet[i] = bookHisto1D("Minv_2jet_"+String,150,0.0,1500.0);
+        _h_Minv_3jet[i] = bookHisto1D("Minv_3jet_"+String,150,0.0,1500.0);
+        _h_Minv_4jet[i] = bookHisto1D("Minv_4jet_"+String,150,0.0,1500.0);
+        _h_JetRapidity[i] = bookHisto1D("JetRapidity_"+String,100,-5.0,5.0);
+        _h_DeltaYElecJet[i] = bookHisto1D("DeltaYElecJet_"+String,140,-7.0,7.0);
+        _h_SumYElecJet[i] = bookHisto1D("SumYElecJet_"+String,140,-7.0,7.0);
+        _h_DeltaR_2jet[i] = bookHisto1D("DeltaR_2jet_"+String,40,0.0,10.0);
+        _h_DeltaR13_3jet[i] = bookHisto1D("DeltaR13_3jet_"+String,40,0.0,10.0);
+        _h_DeltaR23_3jet[i] = bookHisto1D("DeltaR23_3jet_"+String,40,0.0,10.0);
+        _h_DeltaY_2jet[i] = bookHisto1D("DeltaY_2jet_"+String,140,-7.0,7.0);
+        _h_DeltaPhi_2jet[i] = bookHisto1D("DeltaPhi_2jet_"+String,35,0,3.5);
+        _h_DijetMass_2jet[i] = bookHisto1D("DijetMass_2jet_"+String,60,300.0,1500.0);
+        _h_DijetMass_3jet[i] = bookHisto1D("DijetMass_3jet_"+String,60,300.0,1500.0);
+        _h_DijetMass_4jet[i] = bookHisto1D("DijetMass_4jet_"+String,60,300.0,1500.0);
+        _h_AntiDijetMass_2jet[i] = bookHisto1D("AntiDijetMass_2jet_"+String,75,0.0,1500.0);
+        _h_AntiDijetMass_3jet[i] = bookHisto1D("AntiDijetMass_3jet_"+String,75,0.0,1500.0);
+        _h_AntiDijetMass_4jet[i] = bookHisto1D("AntiDijetMass_4jet_"+String,75,0.0,1500.0);
+        _h_ThirdZep_3jet[i] = bookHisto1D("ThirdZep_3jet_"+String,25,-5.0,5.0);
+        _h_ThirdZep_4jet[i] = bookHisto1D("ThirdZep_4jet_"+String,25,-5.0,5.0);
+        _h_FourthZep_4jet[i] = bookHisto1D("FourthZep_4jet_"+String,25,-5.0,5.0);
+        _h_AntiDijetEtaDiff_2jet[i] = bookHisto1D("AntiDijetEtaDiff_2jet_"+String,50,0.0,10.0);
+        _h_AntiDijetEtaDiff_3jet[i] = bookHisto1D("AntiDijetEtaDiff_3jet_"+String,50,0.0,10.0);
+        _h_AntiDijetEtaDiff_4jet[i] = bookHisto1D("AntiDijetEtaDiff_4jet_"+String,50,0.0,10.0);
+        _h_AntiDijetPhiDiff_2jet[i] = bookHisto1D("AntiDijetPhiDiff_2jet_"+String,20,-1.0,1.0);
+        _h_AntiDijetPhiDiff_3jet[i] = bookHisto1D("AntiDijetPhiDiff_3jet_"+String,20,-1.0,1.0);
+        _h_AntiDijetPhiDiff_4jet[i] = bookHisto1D("AntiDijetPhiDiff_4jet_"+String,20,-1.0,1.0);
 		
-	  _h_CutFlow = bookHistogram1D("CutFlow",10,0.0,10.0);
-	  _h_Weights = bookHistogram1D("Weights",25,0.0,1.0);
+		_h_Mjj_0ex[i] = bookHisto1D("Mjj_Excl_00_Jet"+String,200,0.0,5000.0);
+		_h_Mjj_1ex[i] = bookHisto1D("Mjj_Excl_01_Jet"+String,200,0.0,5000.0);
+		_h_Mjj_2ex[i] = bookHisto1D("Mjj_Excl_02_Jet"+String,200,0.0,5000.0);
+		_h_Mjj_3ex[i] = bookHisto1D("Mjj_Excl_03_Jet"+String,200,0.0,5000.0);
+		_h_Mjj_4ex[i] = bookHisto1D("Mjj_Excl_04_Jet"+String,200,0.0,5000.0);
+		_h_Mjj_5ex[i] = bookHisto1D("Mjj_Excl_05_Jet"+String,200,0.0,5000.0);
+		_h_Mjj_6ex[i] = bookHisto1D("Mjj_Excl_06_Jet"+String,200,0.0,5000.0);
+		_h_Mjj_7ex[i] = bookHisto1D("Mjj_Excl_07_Jet"+String,200,0.0,5000.0);
+		_h_Mjj_8ex[i] = bookHisto1D("Mjj_Excl_08_Jet"+String,200,0.0,5000.0);
+		_h_Mjj_9ex[i] = bookHisto1D("Mjj_Excl_09_Jet"+String,200,0.0,5000.0);
+		_h_Mjj_10ex[i] = bookHisto1D("Mjj_Excl_10_Jet"+String,200,0.0,5000.0);
 
       }
+	    _h_CutFlow = bookHisto1D("CutFlow",12,0.0,12.0);
+        _h_NJetsNoCuts = bookHisto1D("NJetsNoCuts",20.0,0.0,20.0);
     }
 	
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       const double weight = event.weight();
-	  _h_Weights->fill(weight);
-	  //size_t event_number = numEvents();	//Could be used to skip broken events in MC containers
+	  _h_CutFlow->fill(1.0);
 
+      // Lepton Projection
       const vector<ClusteredLepton>& leptons = applyProjection<LeptonClusters>(event, "leptons").clusteredLeptons();
       ParticleVector neutrinos = applyProjection<FinalState>(event, "neutrinos").particlesByPt();
-	  _h_CutFlow->fill(1.0,weight);									// All Events (1.0) -> No Cuts
 	
+      // W/Lepton Selection
       if (leptons.size()!=1 || (neutrinos.size()==0)) {				// Keep events with exactly one lepton and at least one paired neutrino
         vetoEvent;
       }
-	  _h_CutFlow->fill(2.0,weight);									// First Cut (2.0) -> Events with one lepton and at least one neutrino
+      _h_CutFlow->fill(2.0);
 	
       FourMomentum lepton = leptons[0].momentum();
       FourMomentum p_miss = neutrinos[0].momentum();
       if (p_miss.Et()<25.0*GeV) {									// MET must be greater than 25.0*GeV
         vetoEvent;
       }
-	  _h_CutFlow->fill(3.0,weight);									// Second Cut (3.0) -> Events with MET greater than 25.0*GeV
+      _h_CutFlow->fill(3.0);
 
       double mT=sqrt(2.0*lepton.pT()*p_miss.Et()*(1.0-cos(lepton.phi()-p_miss.phi())));
       if (mT<40.0*GeV) {											// mT(W) must be greater than 40.0*GeV
         vetoEvent;
       }
-	  _h_CutFlow->fill(4.0,weight);									// Third Cut (4.0) -> Events with mT(W) greater than 40.0*GeV
+      _h_CutFlow->fill(4.0);
 
-	  double W_phi = FourMomentum(lepton + p_miss).phi();
-
-	  const FastJets& jetpro = applyProjection<FastJets>(event, "jets");
-	  vector<FourMomentum> jets;
+      // Jet Projection (only cares about jets with pT > 20 GeV)
+      const FastJets& jetpro = applyProjection<FastJets>(event, "jets");
+      vector<FourMomentum> jets;
       foreach (const Jet& jet, jetpro.jetsByPt(20.0*GeV)) {
-		if (fabs(jet.momentum().rapidity())<4.4) {
-		  jets.push_back(jet.momentum());
-		}
+        if (fabs(jet.momentum().rapidity())<4.4) {
+          jets.push_back(jet.momentum());
+        }
       }
-		
-	  if (jets.size() < 2) vetoEvent;								// Keep dijet events only
-	  _h_CutFlow->fill(5.0,weight);									// Fourth Cut (5.0) -> Events that are dijets
-	  if (jets[0].pT() < 45*GeV) vetoEvent;							// pT_1 must be greater than 45*GeV
-	  _h_CutFlow->fill(6.0,weight);									// Fifth Cut (6.0) -> Events with pT_1 greater than 45*GeV
-	  if (jets[1].pT() < 35*GeV) vetoEvent;							// pT_2 must be greater than 35*GeV
-	  _h_CutFlow->fill(7.0,weight);									// Sixth Cut (7.0) -> Events with pT_2 greater than 35*GeV
-	  if (fabs(W_phi - jets[0].phi()) < 2.5) vetoEvent;				// DPhi(W,jet1) must be greater than 2.5
-	  _h_CutFlow->fill(8.0,weight);									// Seventh Cut (8.0) -> Events with DeltaPhi(W,Jet_1) > 2.5
+      _h_NJetsNoCuts->fill(jets.size());
+	
+      // Jet Selection	
+      if (jets.size() < 2) vetoEvent;								// Keep dijet events only
+      _h_CutFlow->fill(5.0);
+      if (jets[0].pT() < 80*GeV) vetoEvent;							// pT_1 must be greater than 80*GeV
+      _h_CutFlow->fill(6.0);
+      if (jets[1].pT() < 60*GeV) vetoEvent;							// pT_2 must be greater than 60*GeV
+      _h_CutFlow->fill(7.0);
 
-	  double dijet_mass2 = FourMomentum(jets[0]+jets[1]).mass2();
-	  if (dijet_mass2 < 0.0) vetoEvent;								// Veto events with negative m_jj^2
-	  double dijet_mass = sqrt(dijet_mass2);
-	  if (dijet_mass < 350.0*GeV) vetoEvent;						// Veto event with m_jj < 350*GeV
-	  _h_CutFlow->fill(9.0,weight);									// Eigth Cut (9.0) -> Events with Dijet Mass > 350.0*GeV
+      double dijet_mass2 = FourMomentum(jets[0]+jets[1]).mass2();
+      if (dijet_mass2 < 0.0) vetoEvent;								// Veto events with negative m_jj^2
+      double dijet_mass = sqrt(dijet_mass2);
+      if (dijet_mass < 500.0*GeV) vetoEvent;						// Veto event with m_jj < 500*GeV
+      _h_CutFlow->fill(8.0);
+        
+      // Central Jet Veto (Vetos any event that has a jet between Etas of the two leading jets
+      size_t nojets = jets.size();
+      for (size_t j=2; j<nojets; ++j) {
+        if ( nojets>=3 && jets[j].pT()>30.0*GeV &&
+           (
+           ( jets[j].rapidity()<jets[0].rapidity() && jets[j].rapidity()>jets[1].rapidity() ) ||
+           ( jets[j].rapidity()>jets[0].rapidity() && jets[j].rapidity()<jets[1].rapidity() )
+           )
+           ) {
+                vetoEvent;
+        }
+      }
+//        size_t nojets = jets.size();
+//        double margin = 0.4; // akt4
+//        for (size_t j=2;j<nojets;++j) {
+//          if ( nojets>=3 && jets[j].pT()>jetcuts[i] &&
+//             (
+//             ( jets[j].rapidity()<jets[0].rapidity()-margin && jets[j].rapidity()>jets[1].rapidity()+margin ) ||
+//             ( jets[j].rapidity()>jets[0].rapidity()+margin && jets[j].rapidity()<jets[1].rapidity()-margin )
+//             )
+//             ) {
+//                  vetoEvent;
+//          }
+//        }
+      _h_CutFlow->fill(9.0);
+	
+      // Outside Lepton Veto (Vetos any event with leptons outside of the Etas of the two leading jets)
+      bool outsideLeptonVeto = true;
+	  double lepton_eta = lepton.rapidity();
+      if ( (lepton_eta>jets[0].rapidity() && lepton_eta<jets[1].rapidity()) ||
+	       (lepton_eta<jets[0].rapidity() && lepton_eta>jets[1].rapidity()) ) {
+             outsideLeptonVeto = true; // in the rapidity interval defined by lead two jets
+      } 
+	  else {
+             outsideLeptonVeto = false;
+			 vetoEvent
+      }
+	  _h_CutFlow->fill(10.0);
 
-	  double jetcuts[] = {30.0*GeV, 25.0*GeV};						// All jets should be greater than 30*GeV or 25*GeV
-      for (size_t i=0; i<2; ++i) {									
+      double jetcuts[] = {30.0*GeV, 20.0*GeV};						// All jets should be greater than 30*GeV (20*GeV)
+      for (size_t i=0; i<1; ++i) {
         vector<FourMomentum> jets;
-		vector<FourMomentum> jetsByEta;
+        vector<FourMomentum> jetsByEta;
         double HT=lepton.pT()+p_miss.pT();
         foreach (const Jet& jet, jetpro.jetsByPt(jetcuts[i])) {
           if (fabs(jet.momentum().rapidity())<4.4) {
             jets.push_back(jet.momentum());
-			jetsByEta.push_back(jet.momentum());
+            jetsByEta.push_back(jet.momentum());
             HT += jet.momentum().pT();
           }
         }
-		sort(jetsByEta.begin(),jetsByEta.end(),cmpMomByDescPseudorapidity);
+          
+        sort(jetsByEta.begin(),jetsByEta.end(),cmpMomByDescPseudorapidity);		// Sorts Jet list by Pseudorapidity
+        double antidijet_mass2 = FourMomentum(jetsByEta.front()+jetsByEta.back()).mass2();
+        double antidijet_eta_diff = jetsByEta.front().eta() - jetsByEta.back().eta();
+        double antidijet_phi_diff = cos(fabs(jetsByEta.front().phi()-jetsByEta.back().phi()));
 		
-		double antidijet_mass2 = FourMomentum(jetsByEta.front()+jetsByEta.back()).mass2();
-		double antidijet_eta_diff = jetsByEta.front().eta() - jetsByEta.back().eta();
-		double antidijet_phi_diff = cos(fabs(jetsByEta.front().phi()-jetsByEta.back().phi()));
+		if (jets.size()==0) _h_Mjj_0ex[i]->fill(dijet_mass, weight);
 		
+		if (jets.size()==1) _h_Mjj_1ex[i]->fill(dijet_mass, weight);
         if (jets.size()<1) {
-			cout << "Event had less than 2 jets...";
-			continue;
-		}
+          cout << "Event had less than 2 jets...";
+          continue;
+        }
 		
         // Njet>=2 observables
+		if (jets.size()==2) _h_Mjj_2ex[i]->fill(dijet_mass, weight);
         if (jets.size()<2) continue;
         _h_NJetExcl[i]->fill(2.0, weight);
         _h_FirstJetPt_2jet[i]->fill(jets[0].pT(), weight);
         _h_SecondJetPt_2jet[i]->fill(jets[1].pT(), weight);
         _h_Ht_2jet[i]->fill(HT, weight);
-		_h_JetRapidity[i]->fill(jets[0].rapidity(), weight);
+        _h_JetRapidity[i]->fill(jets[0].rapidity(), weight);
         _h_DeltaYElecJet[i]->fill(lepton.rapidity()-jets[0].rapidity(), weight);
         _h_SumYElecJet[i]->fill(lepton.rapidity()+jets[0].rapidity(), weight);
         double m2_2jet = FourMomentum(jets[0]+jets[1]).mass2();
@@ -199,12 +254,13 @@ namespace Rivet {
         _h_DeltaY_2jet[i]->fill(jets[0].rapidity()-jets[1].rapidity(), weight);
         _h_DeltaPhi_2jet[i]->fill(deltaPhi(jets[0], jets[1]), weight);
 
-		_h_DijetMass_2jet[i]->fill(dijet_mass, weight);													// Dijet mass for Njet>=2, same as _h_Minv_2jet
-		_h_AntiDijetMass_2jet[i]->fill(antidijet_mass2>0.0 ? sqrt(antidijet_mass2) : 0.0, weight);		// Anti-Dijet mass for Njet>=2
-		_h_AntiDijetEtaDiff_2jet[i]->fill(antidijet_eta_diff, weight);
-		_h_AntiDijetPhiDiff_2jet[i]->fill(antidijet_phi_diff, weight);
+        _h_DijetMass_2jet[i]->fill(dijet_mass, weight);								// Dijet mass for Njet>=2, same as _h_Minv_2jet
+        _h_AntiDijetMass_2jet[i]->fill(antidijet_mass2>0.0 ? sqrt(antidijet_mass2) : 0.0, weight);		// Anti-Dijet mass for Njet>=2
+        _h_AntiDijetEtaDiff_2jet[i]->fill(antidijet_eta_diff, weight);
+        _h_AntiDijetPhiDiff_2jet[i]->fill(antidijet_phi_diff, weight);
 
         // Njet>=3 observables
+		if (jets.size()==3) _h_Mjj_3ex[i]->fill(dijet_mass, weight);
         if (jets.size()<3) continue;
         _h_NJetExcl[i]->fill(3.0, weight);
         _h_FirstJetPt_3jet[i]->fill(jets[0].pT(), weight);
@@ -214,14 +270,17 @@ namespace Rivet {
         double m2_3jet = FourMomentum(jets[0]+jets[1]+jets[2]).mass2();
         _h_Minv_3jet[i]->fill(m2_3jet>0.0 ? sqrt(m2_3jet) : 0.0, weight);
 
-		_h_DijetMass_3jet[i]->fill(dijet_mass, weight);													// Dijet mass for Njet>=3
-		_h_AntiDijetMass_3jet[i]->fill(antidijet_mass2>0.0 ? sqrt(antidijet_mass2) : 0.0, weight);		// Anti-Dijet mass for Njet>=3
-		_h_AntiDijetEtaDiff_3jet[i]->fill(antidijet_eta_diff, weight);
-		_h_AntiDijetPhiDiff_3jet[i]->fill(antidijet_phi_diff, weight);
-		double zep3 = jets[2].eta()-0.5*(jets[0].eta()+jets[1].eta());
-		_h_ThirdZep_3jet[i]->fill(zep3, weight);														// Third Zeppenfeld for Njet>=3
+        _h_DijetMass_3jet[i]->fill(dijet_mass, weight);													// Dijet mass for Njet>=3
+        _h_AntiDijetMass_3jet[i]->fill(antidijet_mass2>0.0 ? sqrt(antidijet_mass2) : 0.0, weight);		// Anti-Dijet mass for Njet>=3
+        _h_AntiDijetEtaDiff_3jet[i]->fill(antidijet_eta_diff, weight);
+        _h_AntiDijetPhiDiff_3jet[i]->fill(antidijet_phi_diff, weight);
+        double zep3 = jets[2].eta()-0.5*(jets[0].eta()+jets[1].eta());
+        _h_ThirdZep_3jet[i]->fill(zep3, weight);														// Third Zeppenfeld for Njet>=3
+        _h_DeltaR13_3jet[i]->fill(deltaR(jets[0], jets[2]), weight);
+        _h_DeltaR23_3jet[i]->fill(deltaR(jets[1], jets[2]), weight);
 
         // Njet>=4 observables
+		if (jets.size()==4) _h_Mjj_4ex[i]->fill(dijet_mass, weight);
         if (jets.size()<4) continue;
         _h_NJetExcl[i]->fill(4.0, weight);
         _h_FirstJetPt_4jet[i]->fill(jets[0].pT(), weight);
@@ -232,17 +291,24 @@ namespace Rivet {
         double m2_4jet = FourMomentum(jets[0]+jets[1]+jets[2]+jets[3]).mass2();
         _h_Minv_4jet[i]->fill(m2_4jet>0.0 ? sqrt(m2_4jet) : 0.0, weight);
 
-		_h_DijetMass_4jet[i]->fill(dijet_mass, weight);													// Dijet mass for Njet>=4
-		_h_AntiDijetMass_4jet[i]->fill(antidijet_mass2>0.0 ? sqrt(antidijet_mass2) : 0.0, weight);		// Anti-Dijet mass for Njet>=4
-		_h_AntiDijetEtaDiff_4jet[i]->fill(antidijet_eta_diff, weight);
-		_h_AntiDijetPhiDiff_4jet[i]->fill(antidijet_phi_diff, weight);
-		double zep4 = jets[3].eta()-0.5*(jets[0].eta()+jets[1].eta());
-		_h_ThirdZep_4jet[i]->fill(zep3, weight);														// Third Zeppenfeld for Njet>=4
-		_h_FourthZep_4jet[i]->fill(zep4, weight);														// Fourth Zeppenfeld for Njet>=4
+        _h_DijetMass_4jet[i]->fill(dijet_mass, weight);													// Dijet mass for Njet>=4
+        _h_AntiDijetMass_4jet[i]->fill(antidijet_mass2>0.0 ? sqrt(antidijet_mass2) : 0.0, weight);		// Anti-Dijet mass for Njet>=4
+        _h_AntiDijetEtaDiff_4jet[i]->fill(antidijet_eta_diff, weight);
+        _h_AntiDijetPhiDiff_4jet[i]->fill(antidijet_phi_diff, weight);
+        double zep4 = jets[3].eta()-0.5*(jets[0].eta()+jets[1].eta());
+        _h_ThirdZep_4jet[i]->fill(zep3, weight);														// Third Zeppenfeld for Njet>=4
+        _h_FourthZep_4jet[i]->fill(zep4, weight);														// Fourth Zeppenfeld for Njet>=4
 
         // Njet>=5 observables
+		if (jets.size()==5) _h_Mjj_5ex[i]->fill(dijet_mass, weight);
         if (jets.size()<5) continue;
         _h_NJetExcl[i]->fill(5.0, weight);
+		
+		if (jets.size()==6) _h_Mjj_6ex[i]->fill(dijet_mass, weight);
+		if (jets.size()==7) _h_Mjj_7ex[i]->fill(dijet_mass, weight);
+		if (jets.size()==8) _h_Mjj_8ex[i]->fill(dijet_mass, weight);
+		if (jets.size()==9) _h_Mjj_9ex[i]->fill(dijet_mass, weight);
+		if (jets.size()==10) _h_Mjj_10ex[i]->fill(dijet_mass, weight);
       }
 
     }
@@ -250,25 +316,34 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (size_t i=0; i<2; ++i) {
+      for (size_t i=0; i<1; ++i) {
         // first construct jet multi ratio
-        int Nbins = _h_NJetExcl[i]->axis().bins();
-        std::vector<double> ratio(Nbins-1, 0.0);
-        std::vector<double> err(Nbins-1, 0.0);
-        for (int n = 0; n < Nbins-1; ++n) {
-          if (_h_NJetExcl[i]->binHeight(n) > 0.0 && _h_NJetExcl[i]->binHeight(n+1) > 0.0) {
-            ratio[n] = _h_NJetExcl[i]->binHeight(n+1)/_h_NJetExcl[i]->binHeight(n);
-            double relerr_n = _h_NJetExcl[i]->binError(n)/_h_NJetExcl[i]->binHeight(n);
-            double relerr_m = _h_NJetExcl[i]->binError(n+1)/_h_NJetExcl[i]->binHeight(n+1);
-            err[n] = ratio[n] * (relerr_n + relerr_m);
-          }
+//        int Nbins = _h_NJetExcl[i]->axis().bins();
+//        std::vector<double> ratio(Nbins-1, 0.0);
+//        std::vector<double> err(Nbins-1, 0.0);
+//        for (int n = 0; n < Nbins-1; ++n) {
+//          if (_h_NJetExcl[i]->binHeight(n) > 0.0 && _h_NJetExcl[i]->binHeight(n+1) > 0.0) {
+//            ratio[n] = _h_NJetExcl[i]->binHeight(n+1)/_h_NJetExcl[i]->binHeight(n);
+//            double relerr_n = _h_NJetExcl[i]->binError(n)/_h_NJetExcl[i]->binHeight(n);
+//            double relerr_m = _h_NJetExcl[i]->binError(n+1)/_h_NJetExcl[i]->binHeight(n+1);
+//            err[n] = ratio[n] * (relerr_n + relerr_m);
+//          }
+//        }
+//        _h_RatioNJetExcl[i]->setCoordinate(1, ratio, err);
+        for (size_t n = 1; n < _h_NJetExcl[i]->numBins(); ++n) {
+            YODA::HistoBin1D& b0 = _h_NJetExcl[i]->bin(n-1);
+            YODA::HistoBin1D& b1 = _h_NJetExcl[i]->bin(n);
+            if (b0.height() == 0.0 || b1.height() == 0.0) continue;
+            _h_RatioNJetExcl[i]->addPoint(n, b1.height()/b0.height(), 0, b1.height()/b0.height() * (b0.relErr() + b1.relErr()));
         }
-        _h_RatioNJetExcl[i]->setCoordinate(1, ratio, err);
 
         // scale all histos to the cross section
+		cout << crossSection();
         double factor = crossSection()/sumOfWeights();
         scale(_h_DeltaPhi_2jet[i], factor);
         scale(_h_DeltaR_2jet[i], factor);
+		scale(_h_DeltaR13_3jet[i], factor);
+		scale(_h_DeltaR23_3jet[i], factor);
         scale(_h_DeltaY_2jet[i], factor);
         scale(_h_DeltaYElecJet[i], factor);
         scale(_h_FirstJetPt_2jet[i], factor);
@@ -289,21 +364,32 @@ namespace Rivet {
         scale(_h_SumYElecJet[i], factor);
         scale(_h_ThirdJetPt_3jet[i], factor);
         scale(_h_ThirdJetPt_4jet[i], factor);
-		scale(_h_DijetMass_2jet[i], factor);
-		scale(_h_DijetMass_3jet[i], factor);
-		scale(_h_DijetMass_4jet[i], factor);
-		scale(_h_AntiDijetMass_2jet[i], factor);
-		scale(_h_AntiDijetMass_3jet[i], factor);
-		scale(_h_AntiDijetMass_4jet[i], factor);
-		scale(_h_ThirdZep_3jet[i], factor);
-		scale(_h_ThirdZep_4jet[i], factor);
-		scale(_h_FourthZep_4jet[i], factor);
-		scale(_h_AntiDijetEtaDiff_2jet[i], factor);
-		scale(_h_AntiDijetEtaDiff_3jet[i], factor);
-		scale(_h_AntiDijetEtaDiff_4jet[i], factor);
-		scale(_h_AntiDijetPhiDiff_2jet[i], factor);
-		scale(_h_AntiDijetPhiDiff_3jet[i], factor);
-		scale(_h_AntiDijetPhiDiff_4jet[i], factor);
+        scale(_h_DijetMass_2jet[i], factor);
+        scale(_h_DijetMass_3jet[i], factor);
+        scale(_h_DijetMass_4jet[i], factor);
+        scale(_h_AntiDijetMass_2jet[i], factor);
+        scale(_h_AntiDijetMass_3jet[i], factor);
+        scale(_h_AntiDijetMass_4jet[i], factor);
+        scale(_h_ThirdZep_3jet[i], factor);
+        scale(_h_ThirdZep_4jet[i], factor);
+        scale(_h_FourthZep_4jet[i], factor);
+        scale(_h_AntiDijetEtaDiff_2jet[i], factor);
+        scale(_h_AntiDijetEtaDiff_3jet[i], factor);
+        scale(_h_AntiDijetEtaDiff_4jet[i], factor);
+        scale(_h_AntiDijetPhiDiff_2jet[i], factor);
+        scale(_h_AntiDijetPhiDiff_3jet[i], factor);
+        scale(_h_AntiDijetPhiDiff_4jet[i], factor);
+		scale(_h_Mjj_0ex[i], factor)
+		scale(_h_Mjj_1ex[i], factor);
+		scale(_h_Mjj_2ex[i], factor);
+		scale(_h_Mjj_3ex[i], factor);
+		scale(_h_Mjj_4ex[i], factor);
+		scale(_h_Mjj_5ex[i], factor);
+		scale(_h_Mjj_6ex[i], factor);
+		scale(_h_Mjj_7ex[i], factor);
+		scale(_h_Mjj_8ex[i], factor);
+		scale(_h_Mjj_9ex[i], factor);
+		scale(_h_Mjj_10ex[i], factor);
       }
     }
 
@@ -319,47 +405,113 @@ namespace Rivet {
 
     /// @name Histograms
     //@{
-    AIDA::IHistogram1D *_h_DeltaPhi_2jet[2];
-    AIDA::IHistogram1D *_h_DeltaR_2jet[2];
-    AIDA::IHistogram1D *_h_DeltaY_2jet[2];
-    AIDA::IHistogram1D *_h_DeltaYElecJet[2];
-    AIDA::IHistogram1D *_h_FirstJetPt_2jet[2];
-    AIDA::IHistogram1D *_h_FirstJetPt_3jet[2];
-    AIDA::IHistogram1D *_h_FirstJetPt_4jet[2];
-    AIDA::IHistogram1D *_h_FourthJetPt_4jet[2];
-    AIDA::IHistogram1D *_h_Ht_2jet[2];
-    AIDA::IHistogram1D *_h_Ht_3jet[2];
-    AIDA::IHistogram1D *_h_Ht_4jet[2];
-    AIDA::IHistogram1D *_h_JetRapidity[2];
-    AIDA::IHistogram1D *_h_Minv_2jet[2];
-    AIDA::IHistogram1D *_h_Minv_3jet[2];
-    AIDA::IHistogram1D *_h_Minv_4jet[2];
-    AIDA::IHistogram1D *_h_NJetExcl[2];
-    AIDA::IDataPointSet *_h_RatioNJetExcl[2];
-    AIDA::IHistogram1D *_h_SecondJetPt_2jet[2];
-    AIDA::IHistogram1D *_h_SecondJetPt_3jet[2];
-    AIDA::IHistogram1D *_h_SecondJetPt_4jet[2];
-    AIDA::IHistogram1D *_h_SumYElecJet[2];
-    AIDA::IHistogram1D *_h_ThirdJetPt_3jet[2];
-    AIDA::IHistogram1D *_h_ThirdJetPt_4jet[2];
-	AIDA::IHistogram1D *_h_DijetMass_2jet[2];
-	AIDA::IHistogram1D *_h_DijetMass_3jet[2];
-	AIDA::IHistogram1D *_h_DijetMass_4jet[2];
-	AIDA::IHistogram1D *_h_AntiDijetMass_2jet[2];
-	AIDA::IHistogram1D *_h_AntiDijetMass_3jet[2];
-	AIDA::IHistogram1D *_h_AntiDijetMass_4jet[2];
-	AIDA::IHistogram1D *_h_ThirdZep_3jet[2];
-	AIDA::IHistogram1D *_h_ThirdZep_4jet[2];
-	AIDA::IHistogram1D *_h_FourthZep_4jet[2];
-	AIDA::IHistogram1D *_h_AntiDijetEtaDiff_2jet[2];
-	AIDA::IHistogram1D *_h_AntiDijetEtaDiff_3jet[2];
-	AIDA::IHistogram1D *_h_AntiDijetEtaDiff_4jet[2];
-	AIDA::IHistogram1D *_h_AntiDijetPhiDiff_2jet[2];
-	AIDA::IHistogram1D *_h_AntiDijetPhiDiff_3jet[2];
-	AIDA::IHistogram1D *_h_AntiDijetPhiDiff_4jet[2];
-	AIDA::IHistogram1D *_h_CutFlow;
-	AIDA::IHistogram1D *_h_Weights;
-	
+   // AIDA::IHistogram1D *_h_DeltaPhi_2jet[2];
+   // AIDA::IHistogram1D *_h_DeltaR_2jet[2];
+   // AIDA::IHistogram1D *_h_DeltaR13_3jet[2];
+   // AIDA::IHistogram1D *_h_DeltaR23_3jet[2];
+   // AIDA::IHistogram1D *_h_DeltaY_2jet[2];
+   // AIDA::IHistogram1D *_h_DeltaYElecJet[2];
+   // AIDA::IHistogram1D *_h_FirstJetPt_2jet[2];
+   // AIDA::IHistogram1D *_h_FirstJetPt_3jet[2];
+   // AIDA::IHistogram1D *_h_FirstJetPt_4jet[2];
+   // AIDA::IHistogram1D *_h_FourthJetPt_4jet[2];
+   // AIDA::IHistogram1D *_h_Ht_2jet[2];
+   // AIDA::IHistogram1D *_h_Ht_3jet[2];
+   // AIDA::IHistogram1D *_h_Ht_4jet[2];
+   // AIDA::IHistogram1D *_h_JetRapidity[2];
+   // AIDA::IHistogram1D *_h_Minv_2jet[2];
+   // AIDA::IHistogram1D *_h_Minv_3jet[2];
+   // AIDA::IHistogram1D *_h_Minv_4jet[2];
+   // AIDA::IHistogram1D *_h_NJetExcl[2];
+   // AIDA::IDataPointSet *_h_RatioNJetExcl[2];
+   // AIDA::IHistogram1D *_h_SecondJetPt_2jet[2];
+   // AIDA::IHistogram1D *_h_SecondJetPt_3jet[2];
+   // AIDA::IHistogram1D *_h_SecondJetPt_4jet[2];
+   // AIDA::IHistogram1D *_h_SumYElecJet[2];
+   // AIDA::IHistogram1D *_h_ThirdJetPt_3jet[2];
+   // AIDA::IHistogram1D *_h_ThirdJetPt_4jet[2];
+   // AIDA::IHistogram1D *_h_DijetMass_2jet[2];
+   // AIDA::IHistogram1D *_h_DijetMass_3jet[2];
+   // AIDA::IHistogram1D *_h_DijetMass_4jet[2];
+   // AIDA::IHistogram1D *_h_AntiDijetMass_2jet[2];
+   // AIDA::IHistogram1D *_h_AntiDijetMass_3jet[2];
+   // AIDA::IHistogram1D *_h_AntiDijetMass_4jet[2];
+   // AIDA::IHistogram1D *_h_ThirdZep_3jet[2];
+   // AIDA::IHistogram1D *_h_ThirdZep_4jet[2];
+   // AIDA::IHistogram1D *_h_FourthZep_4jet[2];
+   // AIDA::IHistogram1D *_h_AntiDijetEtaDiff_2jet[2];
+   // AIDA::IHistogram1D *_h_AntiDijetEtaDiff_3jet[2];
+   // AIDA::IHistogram1D *_h_AntiDijetEtaDiff_4jet[2];
+   // AIDA::IHistogram1D *_h_AntiDijetPhiDiff_2jet[2];
+   // AIDA::IHistogram1D *_h_AntiDijetPhiDiff_3jet[2];
+   // AIDA::IHistogram1D *_h_AntiDijetPhiDiff_4jet[2];
+   // AIDA::IHistogram1D *_h_CutFlow;
+   // AIDA::IHistogram1D *_h_NJetsNoCuts;
+   // AIDA::IHistogram1D *_h_Mjj_0ex[2];
+   // AIDA::IHistogram1D *_h_Mjj_1ex[2];
+   // AIDA::IHistogram1D *_h_Mjj_2ex[2];
+   // AIDA::IHistogram1D *_h_Mjj_3ex[2];
+   // AIDA::IHistogram1D *_h_Mjj_4ex[2];
+   // AIDA::IHistogram1D *_h_Mjj_5ex[2];
+   // AIDA::IHistogram1D *_h_Mjj_6ex[2];
+   // AIDA::IHistogram1D *_h_Mjj_7ex[2];
+   // AIDA::IHistogram1D *_h_Mjj_8ex[2];
+   // AIDA::IHistogram1D *_h_Mjj_9ex[2];
+   // AIDA::IHistogram1D *_h_Mjj_10ex[2];
+      
+    Histo1DPtr _h_DeltaPhi_2jet[2];
+    Histo1DPtr _h_DeltaR_2jet[2];
+	Histo1DPtr _h_DeltaR13_3jet[2];
+	Histo1DPtr _h_DeltaR23_3jet[2];
+    Histo1DPtr _h_DeltaY_2jet[2];
+    Histo1DPtr _h_DeltaYElecJet[2];
+    Histo1DPtr _h_FirstJetPt_2jet[2];
+    Histo1DPtr _h_FirstJetPt_3jet[2];
+    Histo1DPtr _h_FirstJetPt_4jet[2];
+    Histo1DPtr _h_FourthJetPt_4jet[2];
+    Histo1DPtr _h_Ht_2jet[2];
+    Histo1DPtr _h_Ht_3jet[2];
+    Histo1DPtr _h_Ht_4jet[2];
+    Histo1DPtr _h_JetRapidity[2];
+    Histo1DPtr _h_Minv_2jet[2];
+    Histo1DPtr _h_Minv_3jet[2];
+    Histo1DPtr _h_Minv_4jet[2];
+    Histo1DPtr _h_NJetExcl[2];
+    Scatter2DPtr _h_RatioNJetExcl[2];
+    Histo1DPtr _h_SecondJetPt_2jet[2];
+    Histo1DPtr _h_SecondJetPt_3jet[2];
+    Histo1DPtr _h_SecondJetPt_4jet[2];
+    Histo1DPtr _h_SumYElecJet[2];
+    Histo1DPtr _h_ThirdJetPt_3jet[2];
+    Histo1DPtr _h_ThirdJetPt_4jet[2];
+    Histo1DPtr _h_DijetMass_2jet[2];
+    Histo1DPtr _h_DijetMass_3jet[2];
+    Histo1DPtr _h_DijetMass_4jet[2];
+    Histo1DPtr _h_AntiDijetMass_2jet[2];
+    Histo1DPtr _h_AntiDijetMass_3jet[2];
+    Histo1DPtr _h_AntiDijetMass_4jet[2];
+    Histo1DPtr _h_ThirdZep_3jet[2];
+    Histo1DPtr _h_ThirdZep_4jet[2];
+    Histo1DPtr _h_FourthZep_4jet[2];
+    Histo1DPtr _h_AntiDijetEtaDiff_2jet[2];
+    Histo1DPtr _h_AntiDijetEtaDiff_3jet[2];
+    Histo1DPtr _h_AntiDijetEtaDiff_4jet[2];
+    Histo1DPtr _h_AntiDijetPhiDiff_2jet[2];
+    Histo1DPtr _h_AntiDijetPhiDiff_3jet[2];
+    Histo1DPtr _h_AntiDijetPhiDiff_4jet[2];
+	Histo1DPtr _h_CutFlow;
+    Histo1DPtr _h_NJetsNoCuts;
+	Histo1DPtr _h_Mjj_0ex[2];
+	Histo1DPtr _h_Mjj_1ex[2];
+	Histo1DPtr _h_Mjj_2ex[2];
+	Histo1DPtr _h_Mjj_3ex[2];
+	Histo1DPtr _h_Mjj_4ex[2];
+	Histo1DPtr _h_Mjj_5ex[2];
+	Histo1DPtr _h_Mjj_6ex[2];
+	Histo1DPtr _h_Mjj_7ex[2];
+	Histo1DPtr _h_Mjj_8ex[2];
+	Histo1DPtr _h_Mjj_9ex[2];
+	Histo1DPtr _h_Mjj_10ex[2];
     //@}
 
 
@@ -371,46 +523,3 @@ namespace Rivet {
   DECLARE_RIVET_PLUGIN(WJETS_SYST_NEWANALYSIS);
 
 }
-
-// Just find max/min value in jetsEta, then keep the index for jets[]
-// This finds the most forward and rearward jets in eta
-// cout << "Event: " << event_number;
-// cout << jet_string;
-// cout << jetsEta;
-// double eta_max;
-// double eta_min;
-// FourMomentum jet_eta_max;
-// FourMomentum jet_eta_min;
-// if (jetsEta[0] > jetsEta[1]) {
-// 	eta_max = jetsEta[0];
-// 	jet_eta_max = jets[0];
-// 	eta_min = jetsEta[1];
-// 	jet_eta_min = jets[1];
-// }
-// else{
-// 	eta_max = jetsEta[1];
-// 	jet_eta_max = jets[1];
-// 	eta_min = jetsEta[0];
-// 	jet_eta_min = jets[0];
-// }
-// 
-// if (jetsEta.size() > 2) {
-// 	for (size_t index=2; index<jetsEta.size(); index++) {
-// 		if (eta_max < jetsEta[index]) {
-// 			eta_max = jetsEta[index];
-// 			jet_eta_max = jets[index];
-// 		}
-// 		else if (eta_min > jetsEta[index]) {
-// 			eta_min = jetsEta[index];
-// 			jet_eta_min = jets[index];
-// 		}
-// 	}
-// }
-
-// cout << "Event: " << event_number << endl;
-// cout << "Jet 1 p_T: " << jets[0].pT() << "Jet 2 p_T: " << jets[1].pT() << "W Phi: " << W_phi << endl;
-// cout << "Dijet Mass2: " << dijet_mass2 << ", Dijet Mass: " << dijet_mass << endl;
-// cout << "Jets: " << jets << endl;
-// cout << "Jets By Eta: " << jetsByEta << endl;
-// cout << "Front Jet Eta: " << jetsByEta.front().eta() << ", Rear Jet Eta: " << jetsByEta.back().eta() << endl;
-// cout << "FR Dijet Mass2: " << antidijet_mass2 << ", FR Eta Diff: " << antidijet_eta_diff << ", FR Phi Diff: " << antidijet_phi_diff << endl;

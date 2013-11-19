@@ -184,6 +184,26 @@ RatioPlotYMax=1.99
 LegendXPos=0.05
 # END PLOT
 
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/DeltaR13_3jet_[12]
+Title=$\Delta R$ Distance of Leading and Third Jets
+XLabel=$\Delta R$(First Jet, Third Jet)
+YLabel=d$\sigma$/d$\Delta R$ [pb]
+LogY=0
+RatioPlotYMin=0.0
+RatioPlotYMax=1.99
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/DeltaR23_3jet_[12]
+Title=$\Delta R$ Distance of Sub-leading and Second Jets
+XLabel=$\Delta R$(Second Jet, Third Jet)
+YLabel=d$\sigma$/d$\Delta R$ [pb]
+LogY=0
+RatioPlotYMin=0.0
+RatioPlotYMax=1.99
+LegendXPos=0.05
+# END PLOT
+
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/DeltaY_2jet_[12]
 Title=Rapidity Distance of Leading Jets
 XLabel=$\Delta y$(First Jet, Second Jet)
@@ -356,14 +376,122 @@ LegendXPos=0.05
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/CutFlow
 Title=Cut Flow
-XLabel=
+XLabel=Cut
 YLabel=Events
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/NJetsNoCuts
+Title=Number of Jets in Event
+XLabel=NJets
+YLabel=Events
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_00_Jet[12]
+Title=Dijet Mass ($W+0$ jets)
+XLabel=$m_{jj}$ [GeV]
+YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Weights
-Title=Distribution of Weights
-XLabel=
-YLabel=Weights
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_01_Jet[12]
+Title=Dijet Mass ($W+1$ jets)
+XLabel=$m_{jj}$ [GeV]
+YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_02_Jet[12]
+Title=Dijet Mass ($W+2$ jets)
+XLabel=$m_{jj}$ [GeV]
+YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_03_Jet[12]
+Title=Dijet Mass ($W+3$ jets)
+XLabel=$m_{jj}$ [GeV]
+YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_04_Jet[12]
+Title=Dijet Mass ($W+4$ jets)
+XLabel=$m_{jj}$ [GeV]
+YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_05_Jet[12]
+Title=Dijet Mass ($W+5$ jets)
+XLabel=$m_{jj}$ [GeV]
+YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_06_Jet[12]
+Title=Dijet Mass ($W+6$ jets)
+XLabel=$m_{jj}$ [GeV]
+YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_07_Jet[12]
+Title=Dijet Mass ($W+7$ jets)
+XLabel=$m_{jj}$ [GeV]
+YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_08_Jet[12]
+Title=Dijet Mass ($W+8$ jets)
+XLabel=$m_{jj}$ [GeV]
+YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_09_Jet[12]
+Title=Dijet Mass ($W+9$ jets)
+XLabel=$m_{jj}$ [GeV]
+YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_10_Jet[12]
+Title=Dijet Mass ($W+10$ jets)
+XLabel=$m_{jj}$ [GeV]
+YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
