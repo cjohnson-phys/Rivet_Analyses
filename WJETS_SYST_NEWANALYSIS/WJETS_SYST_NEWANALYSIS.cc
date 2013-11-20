@@ -208,7 +208,7 @@ namespace Rivet {
       } 
 	  else {
              outsideLeptonVeto = false;
-			 vetoEvent
+			 vetoEvent;
       }
 	  _h_CutFlow->fill(10.0);
 
@@ -379,7 +379,7 @@ namespace Rivet {
         scale(_h_AntiDijetPhiDiff_2jet[i], factor);
         scale(_h_AntiDijetPhiDiff_3jet[i], factor);
         scale(_h_AntiDijetPhiDiff_4jet[i], factor);
-		scale(_h_Mjj_0ex[i], factor)
+		scale(_h_Mjj_0ex[i], factor);
 		scale(_h_Mjj_1ex[i], factor);
 		scale(_h_Mjj_2ex[i], factor);
 		scale(_h_Mjj_3ex[i], factor);
