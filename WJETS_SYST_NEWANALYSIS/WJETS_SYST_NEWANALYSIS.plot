@@ -374,7 +374,7 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/CutFlow
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/CutFlow_[12]
 Title=Cut Flow
 XLabel=Cut
 YLabel=Events
