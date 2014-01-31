@@ -1,6 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-//#include "Rivet/RivetAIDA.hh"
+#include "Rivet/RivetAIDA.hh"
 #include "Rivet/Tools/Logging.hh"
 #include "Rivet/Projections/IdentifiedFinalState.hh"
 #include "Rivet/Projections/VetoedFinalState.hh"
@@ -38,8 +38,8 @@ namespace Rivet {
 
       FinalState fs;
       IdentifiedFinalState allleptons;
-      allleptons.acceptIdPair(PID::ELECTRON);
-      allleptons.acceptIdPair(PID::MUON);
+      allleptons.acceptIdPair(ELECTRON);
+      allleptons.acceptIdPair(MUON);
       std::vector<std::pair<double, double> > etaRanges;
       etaRanges.push_back(make_pair(-2.4, 2.4));									// lepton |eta| < 2.4
       LeptonClusters leptons(fs, allleptons, 0.1, true, etaRanges, 25.0*GeV);		// pT_min of lepton is 25.0*GeV
@@ -47,8 +47,8 @@ namespace Rivet {
 
       // Leading neutrinos for Etmiss
       LeadingParticlesFinalState neutrinos(fs);
-      neutrinos.addParticleIdPair(PID::NU_E);
-      neutrinos.addParticleIdPair(PID::NU_MU);
+      neutrinos.addParticleIdPair(NU_E);
+      neutrinos.addParticleIdPair(NU_MU);
       neutrinos.setLeadingOnly(true);
       addProjection(neutrinos, "neutrinos");
 
@@ -65,71 +65,71 @@ namespace Rivet {
         // New Histograms defined here (must book them here and define them in .plots file.)
         string String = static_cast<ostringstream*>( &(ostringstream() << i+1) )->str();
 		
-        _h_NJetExcl[i] = bookHisto1D("NJetExcl_"+String,4,0,4);
-        _h_RatioNJetExcl[i] = bookScatter2D("RatioNJetExcl_"+String,5,1,5);
-        _h_FirstJetPt_2jet[i] = bookHisto1D("FirstJetPt_2jet_"+String,50,0.0,500.0);
-        _h_FirstJetPt_3jet[i] = bookHisto1D("FirstJetPt_3jet_"+String,50,0.0,500.0);
-        _h_FirstJetPt_4jet[i] = bookHisto1D("FirstJetPt_4jet_"+String,50,0.0,500.0);
-        _h_SecondJetPt_2jet[i] = bookHisto1D("SecondJetPt_2jet_"+String,50,0.0,500.0);
-        _h_SecondJetPt_3jet[i] = bookHisto1D("SecondJetPt_3jet_"+String,50,0.0,500.0);
-        _h_SecondJetPt_4jet[i] = bookHisto1D("SecondJetPt_4jet_"+String,50,0.0,500.0);
-        _h_ThirdJetPt_3jet[i] = bookHisto1D("ThirdJetPt_3jet_"+String,50,0.0,500.0);
-        _h_ThirdJetPt_4jet[i] = bookHisto1D("ThirdJetPt_4jet_"+String,50,0.0,500.0);
-        _h_FourthJetPt_4jet[i] = bookHisto1D("FourthJetPt_4jet_"+String,50,0.0,500.0);
-        _h_Ht_2jet[i] = bookHisto1D("Ht_2jet_"+String,200,0.0,5000.0);
-        _h_Ht_3jet[i] = bookHisto1D("Ht_3jet_"+String,200,0.0,5000.0);
-        _h_Ht_4jet[i] = bookHisto1D("Ht_4jet_"+String,200,0.0,5000.0);
-        _h_Minv_2jet[i] = bookHisto1D("Minv_2jet_"+String,200,0.0,5000.0);
-        _h_Minv_3jet[i] = bookHisto1D("Minv_3jet_"+String,200,0.0,5000.0);
-        _h_Minv_4jet[i] = bookHisto1D("Minv_4jet_"+String,200,0.0,5000.0);
-        _h_JetRapidity[i] = bookHisto1D("JetRapidity_"+String,100,-5.0,5.0);
-        _h_DeltaYElecJet[i] = bookHisto1D("DeltaYElecJet_"+String,140,-7.0,7.0);
-        _h_SumYElecJet[i] = bookHisto1D("SumYElecJet_"+String,140,-7.0,7.0);
-        _h_DeltaR_2jet[i] = bookHisto1D("DeltaR_2jet_"+String,40,0.0,10.0);
-        _h_DeltaR13_3jet[i] = bookHisto1D("DeltaR13_3jet_"+String,40,0.0,10.0);
-        _h_DeltaR23_3jet[i] = bookHisto1D("DeltaR23_3jet_"+String,40,0.0,10.0);
-        _h_DeltaY_2jet[i] = bookHisto1D("DeltaY_2jet_"+String,140,-7.0,7.0);
-        _h_DeltaPhi_2jet[i] = bookHisto1D("DeltaPhi_2jet_"+String,35,0,3.5);
-        _h_DijetMass_2jet[i] = bookHisto1D("DijetMass_2jet_"+String,200,0.0,5000.0);
-        _h_DijetMass_3jet[i] = bookHisto1D("DijetMass_3jet_"+String,200,0.0,5000.0);
-        _h_DijetMass_4jet[i] = bookHisto1D("DijetMass_4jet_"+String,200,0.0,5000.0);
-        _h_AntiDijetMass_2jet[i] = bookHisto1D("AntiDijetMass_2jet_"+String,200,0.0,5000.0);
-        _h_AntiDijetMass_3jet[i] = bookHisto1D("AntiDijetMass_3jet_"+String,200,0.0,5000.0);
-        _h_AntiDijetMass_4jet[i] = bookHisto1D("AntiDijetMass_4jet_"+String,200,0.0,5000.0);
-        _h_ThirdZep_3jet[i] = bookHisto1D("ThirdZep_3jet_"+String,25,-5.0,5.0);
-        _h_ThirdZep_4jet[i] = bookHisto1D("ThirdZep_4jet_"+String,25,-5.0,5.0);
-        _h_FourthZep_4jet[i] = bookHisto1D("FourthZep_4jet_"+String,25,-5.0,5.0);
-        _h_AntiDijetEtaDiff_2jet[i] = bookHisto1D("AntiDijetEtaDiff_2jet_"+String,50,0.0,10.0);
-        _h_AntiDijetEtaDiff_3jet[i] = bookHisto1D("AntiDijetEtaDiff_3jet_"+String,50,0.0,10.0);
-        _h_AntiDijetEtaDiff_4jet[i] = bookHisto1D("AntiDijetEtaDiff_4jet_"+String,50,0.0,10.0);
-        _h_AntiDijetPhiDiff_2jet[i] = bookHisto1D("AntiDijetPhiDiff_2jet_"+String,20,-1.0,1.0);
-        _h_AntiDijetPhiDiff_3jet[i] = bookHisto1D("AntiDijetPhiDiff_3jet_"+String,20,-1.0,1.0);
-        _h_AntiDijetPhiDiff_4jet[i] = bookHisto1D("AntiDijetPhiDiff_4jet_"+String,20,-1.0,1.0);
-	    _h_CutFlow[i] = bookHisto1D("CutFlow_"+String,12,0.0,12.0);
+        _h_NJetExcl[i] = bookHistogram1D("NJetExcl_"+String,4,0,4);
+        _h_RatioNJetExcl[i] = bookDataPointSet("RatioNJetExcl_"+String,5,1,5);
+        _h_FirstJetPt_2jet[i] = bookHistogram1D("FirstJetPt_2jet_"+String,50,0.0,500.0);
+        _h_FirstJetPt_3jet[i] = bookHistogram1D("FirstJetPt_3jet_"+String,50,0.0,500.0);
+        _h_FirstJetPt_4jet[i] = bookHistogram1D("FirstJetPt_4jet_"+String,50,0.0,500.0);
+        _h_SecondJetPt_2jet[i] = bookHistogram1D("SecondJetPt_2jet_"+String,50,0.0,500.0);
+        _h_SecondJetPt_3jet[i] = bookHistogram1D("SecondJetPt_3jet_"+String,50,0.0,500.0);
+        _h_SecondJetPt_4jet[i] = bookHistogram1D("SecondJetPt_4jet_"+String,50,0.0,500.0);
+        _h_ThirdJetPt_3jet[i] = bookHistogram1D("ThirdJetPt_3jet_"+String,50,0.0,500.0);
+        _h_ThirdJetPt_4jet[i] = bookHistogram1D("ThirdJetPt_4jet_"+String,50,0.0,500.0);
+        _h_FourthJetPt_4jet[i] = bookHistogram1D("FourthJetPt_4jet_"+String,50,0.0,500.0);
+        _h_Ht_2jet[i] = bookHistogram1D("Ht_2jet_"+String,200,0.0,5000.0);
+        _h_Ht_3jet[i] = bookHistogram1D("Ht_3jet_"+String,200,0.0,5000.0);
+        _h_Ht_4jet[i] = bookHistogram1D("Ht_4jet_"+String,200,0.0,5000.0);
+        _h_Minv_2jet[i] = bookHistogram1D("Minv_2jet_"+String,200,0.0,5000.0);
+        _h_Minv_3jet[i] = bookHistogram1D("Minv_3jet_"+String,200,0.0,5000.0);
+        _h_Minv_4jet[i] = bookHistogram1D("Minv_4jet_"+String,200,0.0,5000.0);
+        _h_JetRapidity[i] = bookHistogram1D("JetRapidity_"+String,100,-5.0,5.0);
+        _h_DeltaYElecJet[i] = bookHistogram1D("DeltaYElecJet_"+String,140,-7.0,7.0);
+        _h_SumYElecJet[i] = bookHistogram1D("SumYElecJet_"+String,140,-7.0,7.0);
+        _h_DeltaR_2jet[i] = bookHistogram1D("DeltaR_2jet_"+String,40,0.0,10.0);
+        _h_DeltaR13_3jet[i] = bookHistogram1D("DeltaR13_3jet_"+String,40,0.0,10.0);
+        _h_DeltaR23_3jet[i] = bookHistogram1D("DeltaR23_3jet_"+String,40,0.0,10.0);
+        _h_DeltaY_2jet[i] = bookHistogram1D("DeltaY_2jet_"+String,140,-7.0,7.0);
+        _h_DeltaPhi_2jet[i] = bookHistogram1D("DeltaPhi_2jet_"+String,35,0,3.5);
+        _h_DijetMass_2jet[i] = bookHistogram1D("DijetMass_2jet_"+String,200,0.0,5000.0);
+        _h_DijetMass_3jet[i] = bookHistogram1D("DijetMass_3jet_"+String,200,0.0,5000.0);
+        _h_DijetMass_4jet[i] = bookHistogram1D("DijetMass_4jet_"+String,200,0.0,5000.0);
+        _h_AntiDijetMass_2jet[i] = bookHistogram1D("AntiDijetMass_2jet_"+String,200,0.0,5000.0);
+        _h_AntiDijetMass_3jet[i] = bookHistogram1D("AntiDijetMass_3jet_"+String,200,0.0,5000.0);
+        _h_AntiDijetMass_4jet[i] = bookHistogram1D("AntiDijetMass_4jet_"+String,200,0.0,5000.0);
+        _h_ThirdZep_3jet[i] = bookHistogram1D("ThirdZep_3jet_"+String,25,-5.0,5.0);
+        _h_ThirdZep_4jet[i] = bookHistogram1D("ThirdZep_4jet_"+String,25,-5.0,5.0);
+        _h_FourthZep_4jet[i] = bookHistogram1D("FourthZep_4jet_"+String,25,-5.0,5.0);
+        _h_AntiDijetEtaDiff_2jet[i] = bookHistogram1D("AntiDijetEtaDiff_2jet_"+String,50,0.0,10.0);
+        _h_AntiDijetEtaDiff_3jet[i] = bookHistogram1D("AntiDijetEtaDiff_3jet_"+String,50,0.0,10.0);
+        _h_AntiDijetEtaDiff_4jet[i] = bookHistogram1D("AntiDijetEtaDiff_4jet_"+String,50,0.0,10.0);
+        _h_AntiDijetPhiDiff_2jet[i] = bookHistogram1D("AntiDijetPhiDiff_2jet_"+String,20,-1.0,1.0);
+        _h_AntiDijetPhiDiff_3jet[i] = bookHistogram1D("AntiDijetPhiDiff_3jet_"+String,20,-1.0,1.0);
+        _h_AntiDijetPhiDiff_4jet[i] = bookHistogram1D("AntiDijetPhiDiff_4jet_"+String,20,-1.0,1.0);
+        _h_CutFlow[i] = bookHistogram1D("CutFlow_"+String,12,0.0,12.0);
 		
-		_h_Mjj_0ex[i] = bookHisto1D("Mjj_Excl_00_Jet_"+String,200,0.0,5000.0);
-		_h_Mjj_1ex[i] = bookHisto1D("Mjj_Excl_01_Jet_"+String,200,0.0,5000.0);
-		_h_Mjj_2ex[i] = bookHisto1D("Mjj_Excl_02_Jet_"+String,200,0.0,5000.0);
-		_h_Mjj_3ex[i] = bookHisto1D("Mjj_Excl_03_Jet_"+String,200,0.0,5000.0);
-		_h_Mjj_4ex[i] = bookHisto1D("Mjj_Excl_04_Jet_"+String,200,0.0,5000.0);
-		_h_Mjj_5ex[i] = bookHisto1D("Mjj_Excl_05_Jet_"+String,200,0.0,5000.0);
-		_h_Mjj_6ex[i] = bookHisto1D("Mjj_Excl_06_Jet_"+String,200,0.0,5000.0);
-		_h_Mjj_7ex[i] = bookHisto1D("Mjj_Excl_07_Jet_"+String,200,0.0,5000.0);
-		_h_Mjj_8ex[i] = bookHisto1D("Mjj_Excl_08_Jet_"+String,200,0.0,5000.0);
-		_h_Mjj_9ex[i] = bookHisto1D("Mjj_Excl_09_Jet_"+String,200,0.0,5000.0);
-		_h_Mjj_10ex[i] = bookHisto1D("Mjj_Excl_10_Jet_"+String,200,0.0,5000.0);
+        _h_Mjj_0ex[i] = bookHistogram1D("Mjj_Excl_00_Jet_"+String,200,0.0,5000.0);
+        _h_Mjj_1ex[i] = bookHistogram1D("Mjj_Excl_01_Jet_"+String,200,0.0,5000.0);
+        _h_Mjj_2ex[i] = bookHistogram1D("Mjj_Excl_02_Jet_"+String,200,0.0,5000.0);
+        _h_Mjj_3ex[i] = bookHistogram1D("Mjj_Excl_03_Jet_"+String,200,0.0,5000.0);
+        _h_Mjj_4ex[i] = bookHistogram1D("Mjj_Excl_04_Jet_"+String,200,0.0,5000.0);
+        _h_Mjj_5ex[i] = bookHistogram1D("Mjj_Excl_05_Jet_"+String,200,0.0,5000.0);
+        _h_Mjj_6ex[i] = bookHistogram1D("Mjj_Excl_06_Jet_"+String,200,0.0,5000.0);
+        _h_Mjj_7ex[i] = bookHistogram1D("Mjj_Excl_07_Jet_"+String,200,0.0,5000.0);
+        _h_Mjj_8ex[i] = bookHistogram1D("Mjj_Excl_08_Jet_"+String,200,0.0,5000.0);
+        _h_Mjj_9ex[i] = bookHistogram1D("Mjj_Excl_09_Jet_"+String,200,0.0,5000.0);
+        _h_Mjj_10ex[i] = bookHistogram1D("Mjj_Excl_10_Jet_"+String,200,0.0,5000.0);
 
       }
 	  
-	  _h_NJetsNoCuts = bookHisto1D("NJetsNoCuts",20.0,0.0,20.0);
+	  _h_NJetsNoCuts = bookHistogram1D("NJetsNoCuts",20.0,0.0,20.0);
     }
 	
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       const double weight = event.weight();
-	  TotWeight+=weight;
-	  _h_CutFlow[0]->fill(1.0);
-	  _h_CutFlow[1]->fill(1.0);
+      TotWeight+=weight;
+      _h_CutFlow[0]->fill(1.0);
+      _h_CutFlow[1]->fill(1.0);
 
       // Lepton Projection
       const vector<ClusteredLepton>& leptons = applyProjection<LeptonClusters>(event, "leptons").clusteredLeptons();
@@ -330,24 +330,24 @@ namespace Rivet {
     void finalize() {
       for (size_t i=0; i<2; ++i) {
         // first construct jet multi ratio
-//        int Nbins = _h_NJetExcl[i]->axis().bins();
-//        std::vector<double> ratio(Nbins-1, 0.0);
-//        std::vector<double> err(Nbins-1, 0.0);
-//        for (int n = 0; n < Nbins-1; ++n) {
-//          if (_h_NJetExcl[i]->binHeight(n) > 0.0 && _h_NJetExcl[i]->binHeight(n+1) > 0.0) {
-//            ratio[n] = _h_NJetExcl[i]->binHeight(n+1)/_h_NJetExcl[i]->binHeight(n);
-//            double relerr_n = _h_NJetExcl[i]->binError(n)/_h_NJetExcl[i]->binHeight(n);
-//            double relerr_m = _h_NJetExcl[i]->binError(n+1)/_h_NJetExcl[i]->binHeight(n+1);
-//            err[n] = ratio[n] * (relerr_n + relerr_m);
-//          }
-//        }
-//        _h_RatioNJetExcl[i]->setCoordinate(1, ratio, err);
-        for (size_t n = 1; n < _h_NJetExcl[i]->numBins(); ++n) {
-            YODA::HistoBin1D& b0 = _h_NJetExcl[i]->bin(n-1);
-            YODA::HistoBin1D& b1 = _h_NJetExcl[i]->bin(n);
-            if (b0.height() == 0.0 || b1.height() == 0.0) continue;
-            _h_RatioNJetExcl[i]->addPoint(n, b1.height()/b0.height(), 0, b1.height()/b0.height() * (b0.relErr() + b1.relErr()));
-        }
+       int Nbins = _h_NJetExcl[i]->axis().bins();
+       std::vector<double> ratio(Nbins-1, 0.0);
+       std::vector<double> err(Nbins-1, 0.0);
+       for (int n = 0; n < Nbins-1; ++n) {
+         if (_h_NJetExcl[i]->binHeight(n) > 0.0 && _h_NJetExcl[i]->binHeight(n+1) > 0.0) {
+           ratio[n] = _h_NJetExcl[i]->binHeight(n+1)/_h_NJetExcl[i]->binHeight(n);
+           double relerr_n = _h_NJetExcl[i]->binError(n)/_h_NJetExcl[i]->binHeight(n);
+           double relerr_m = _h_NJetExcl[i]->binError(n+1)/_h_NJetExcl[i]->binHeight(n+1);
+           err[n] = ratio[n] * (relerr_n + relerr_m);
+         }
+       }
+       _h_RatioNJetExcl[i]->setCoordinate(1, ratio, err);
+        // for (size_t n = 1; n < _h_NJetExcl[i]->numBins(); ++n) {
+        //     YODA::HistoBin1D& b0 = _h_NJetExcl[i]->bin(n-1);
+        //     YODA::HistoBin1D& b1 = _h_NJetExcl[i]->bin(n);
+        //     if (b0.height() == 0.0 || b1.height() == 0.0) continue;
+        //     _h_RatioNJetExcl[i]->addPoint(n, b1.height()/b0.height(), 0, b1.height()/b0.height() * (b0.relErr() + b1.relErr()));
+        // }
 
         // scale all histos to the cross section
 		cout << crossSection() << endl << sumOfWeights();
@@ -421,113 +421,59 @@ namespace Rivet {
 
     /// @name Histograms
     //@{
-   // AIDA::IHistogram1D *_h_DeltaPhi_2jet[2];
-   // AIDA::IHistogram1D *_h_DeltaR_2jet[2];
-   // AIDA::IHistogram1D *_h_DeltaR13_3jet[2];
-   // AIDA::IHistogram1D *_h_DeltaR23_3jet[2];
-   // AIDA::IHistogram1D *_h_DeltaY_2jet[2];
-   // AIDA::IHistogram1D *_h_DeltaYElecJet[2];
-   // AIDA::IHistogram1D *_h_FirstJetPt_2jet[2];
-   // AIDA::IHistogram1D *_h_FirstJetPt_3jet[2];
-   // AIDA::IHistogram1D *_h_FirstJetPt_4jet[2];
-   // AIDA::IHistogram1D *_h_FourthJetPt_4jet[2];
-   // AIDA::IHistogram1D *_h_Ht_2jet[2];
-   // AIDA::IHistogram1D *_h_Ht_3jet[2];
-   // AIDA::IHistogram1D *_h_Ht_4jet[2];
-   // AIDA::IHistogram1D *_h_JetRapidity[2];
-   // AIDA::IHistogram1D *_h_Minv_2jet[2];
-   // AIDA::IHistogram1D *_h_Minv_3jet[2];
-   // AIDA::IHistogram1D *_h_Minv_4jet[2];
-   // AIDA::IHistogram1D *_h_NJetExcl[2];
-   // AIDA::IDataPointSet *_h_RatioNJetExcl[2];
-   // AIDA::IHistogram1D *_h_SecondJetPt_2jet[2];
-   // AIDA::IHistogram1D *_h_SecondJetPt_3jet[2];
-   // AIDA::IHistogram1D *_h_SecondJetPt_4jet[2];
-   // AIDA::IHistogram1D *_h_SumYElecJet[2];
-   // AIDA::IHistogram1D *_h_ThirdJetPt_3jet[2];
-   // AIDA::IHistogram1D *_h_ThirdJetPt_4jet[2];
-   // AIDA::IHistogram1D *_h_DijetMass_2jet[2];
-   // AIDA::IHistogram1D *_h_DijetMass_3jet[2];
-   // AIDA::IHistogram1D *_h_DijetMass_4jet[2];
-   // AIDA::IHistogram1D *_h_AntiDijetMass_2jet[2];
-   // AIDA::IHistogram1D *_h_AntiDijetMass_3jet[2];
-   // AIDA::IHistogram1D *_h_AntiDijetMass_4jet[2];
-   // AIDA::IHistogram1D *_h_ThirdZep_3jet[2];
-   // AIDA::IHistogram1D *_h_ThirdZep_4jet[2];
-   // AIDA::IHistogram1D *_h_FourthZep_4jet[2];
-   // AIDA::IHistogram1D *_h_AntiDijetEtaDiff_2jet[2];
-   // AIDA::IHistogram1D *_h_AntiDijetEtaDiff_3jet[2];
-   // AIDA::IHistogram1D *_h_AntiDijetEtaDiff_4jet[2];
-   // AIDA::IHistogram1D *_h_AntiDijetPhiDiff_2jet[2];
-   // AIDA::IHistogram1D *_h_AntiDijetPhiDiff_3jet[2];
-   // AIDA::IHistogram1D *_h_AntiDijetPhiDiff_4jet[2];
-   // AIDA::IHistogram1D *_h_CutFlow[2];
-   // AIDA::IHistogram1D *_h_NJetsNoCuts;
-   // AIDA::IHistogram1D *_h_Mjj_0ex[2];
-   // AIDA::IHistogram1D *_h_Mjj_1ex[2];
-   // AIDA::IHistogram1D *_h_Mjj_2ex[2];
-   // AIDA::IHistogram1D *_h_Mjj_3ex[2];
-   // AIDA::IHistogram1D *_h_Mjj_4ex[2];
-   // AIDA::IHistogram1D *_h_Mjj_5ex[2];
-   // AIDA::IHistogram1D *_h_Mjj_6ex[2];
-   // AIDA::IHistogram1D *_h_Mjj_7ex[2];
-   // AIDA::IHistogram1D *_h_Mjj_8ex[2];
-   // AIDA::IHistogram1D *_h_Mjj_9ex[2];
-   // AIDA::IHistogram1D *_h_Mjj_10ex[2];
-      
-    Histo1DPtr _h_DeltaPhi_2jet[2];
-    Histo1DPtr _h_DeltaR_2jet[2];
-	Histo1DPtr _h_DeltaR13_3jet[2];
-	Histo1DPtr _h_DeltaR23_3jet[2];
-    Histo1DPtr _h_DeltaY_2jet[2];
-    Histo1DPtr _h_DeltaYElecJet[2];
-    Histo1DPtr _h_FirstJetPt_2jet[2];
-    Histo1DPtr _h_FirstJetPt_3jet[2];
-    Histo1DPtr _h_FirstJetPt_4jet[2];
-    Histo1DPtr _h_FourthJetPt_4jet[2];
-    Histo1DPtr _h_Ht_2jet[2];
-    Histo1DPtr _h_Ht_3jet[2];
-    Histo1DPtr _h_Ht_4jet[2];
-    Histo1DPtr _h_JetRapidity[2];
-    Histo1DPtr _h_Minv_2jet[2];
-    Histo1DPtr _h_Minv_3jet[2];
-    Histo1DPtr _h_Minv_4jet[2];
-    Histo1DPtr _h_NJetExcl[2];
-    Scatter2DPtr _h_RatioNJetExcl[2];
-    Histo1DPtr _h_SecondJetPt_2jet[2];
-    Histo1DPtr _h_SecondJetPt_3jet[2];
-    Histo1DPtr _h_SecondJetPt_4jet[2];
-    Histo1DPtr _h_SumYElecJet[2];
-    Histo1DPtr _h_ThirdJetPt_3jet[2];
-    Histo1DPtr _h_ThirdJetPt_4jet[2];
-    Histo1DPtr _h_DijetMass_2jet[2];
-    Histo1DPtr _h_DijetMass_3jet[2];
-    Histo1DPtr _h_DijetMass_4jet[2];
-    Histo1DPtr _h_AntiDijetMass_2jet[2];
-    Histo1DPtr _h_AntiDijetMass_3jet[2];
-    Histo1DPtr _h_AntiDijetMass_4jet[2];
-    Histo1DPtr _h_ThirdZep_3jet[2];
-    Histo1DPtr _h_ThirdZep_4jet[2];
-    Histo1DPtr _h_FourthZep_4jet[2];
-    Histo1DPtr _h_AntiDijetEtaDiff_2jet[2];
-    Histo1DPtr _h_AntiDijetEtaDiff_3jet[2];
-    Histo1DPtr _h_AntiDijetEtaDiff_4jet[2];
-    Histo1DPtr _h_AntiDijetPhiDiff_2jet[2];
-    Histo1DPtr _h_AntiDijetPhiDiff_3jet[2];
-    Histo1DPtr _h_AntiDijetPhiDiff_4jet[2];
-	Histo1DPtr _h_CutFlow[2];
-    Histo1DPtr _h_NJetsNoCuts;
-	Histo1DPtr _h_Mjj_0ex[2];
-	Histo1DPtr _h_Mjj_1ex[2];
-	Histo1DPtr _h_Mjj_2ex[2];
-	Histo1DPtr _h_Mjj_3ex[2];
-	Histo1DPtr _h_Mjj_4ex[2];
-	Histo1DPtr _h_Mjj_5ex[2];
-	Histo1DPtr _h_Mjj_6ex[2];
-	Histo1DPtr _h_Mjj_7ex[2];
-	Histo1DPtr _h_Mjj_8ex[2];
-	Histo1DPtr _h_Mjj_9ex[2];
-	Histo1DPtr _h_Mjj_10ex[2];
+	AIDA::IHistogram1D *_h_DeltaPhi_2jet[2];
+	AIDA::IHistogram1D *_h_DeltaR_2jet[2];
+	AIDA::IHistogram1D *_h_DeltaR13_3jet[2];
+	AIDA::IHistogram1D *_h_DeltaR23_3jet[2];
+	AIDA::IHistogram1D *_h_DeltaY_2jet[2];
+	AIDA::IHistogram1D *_h_DeltaYElecJet[2];
+	AIDA::IHistogram1D *_h_FirstJetPt_2jet[2];
+	AIDA::IHistogram1D *_h_FirstJetPt_3jet[2];
+	AIDA::IHistogram1D *_h_FirstJetPt_4jet[2];
+	AIDA::IHistogram1D *_h_FourthJetPt_4jet[2];
+	AIDA::IHistogram1D *_h_Ht_2jet[2];
+	AIDA::IHistogram1D *_h_Ht_3jet[2];
+	AIDA::IHistogram1D *_h_Ht_4jet[2];
+	AIDA::IHistogram1D *_h_JetRapidity[2];
+	AIDA::IHistogram1D *_h_Minv_2jet[2];
+	AIDA::IHistogram1D *_h_Minv_3jet[2];
+	AIDA::IHistogram1D *_h_Minv_4jet[2];
+	AIDA::IHistogram1D *_h_NJetExcl[2];
+	AIDA::IDataPointSet *_h_RatioNJetExcl[2];
+	AIDA::IHistogram1D *_h_SecondJetPt_2jet[2];
+	AIDA::IHistogram1D *_h_SecondJetPt_3jet[2];
+	AIDA::IHistogram1D *_h_SecondJetPt_4jet[2];
+	AIDA::IHistogram1D *_h_SumYElecJet[2];
+	AIDA::IHistogram1D *_h_ThirdJetPt_3jet[2];
+	AIDA::IHistogram1D *_h_ThirdJetPt_4jet[2];
+	AIDA::IHistogram1D *_h_DijetMass_2jet[2];
+	AIDA::IHistogram1D *_h_DijetMass_3jet[2];
+	AIDA::IHistogram1D *_h_DijetMass_4jet[2];
+	AIDA::IHistogram1D *_h_AntiDijetMass_2jet[2];
+	AIDA::IHistogram1D *_h_AntiDijetMass_3jet[2];
+	AIDA::IHistogram1D *_h_AntiDijetMass_4jet[2];
+	AIDA::IHistogram1D *_h_ThirdZep_3jet[2];
+	AIDA::IHistogram1D *_h_ThirdZep_4jet[2];
+	AIDA::IHistogram1D *_h_FourthZep_4jet[2];
+	AIDA::IHistogram1D *_h_AntiDijetEtaDiff_2jet[2];
+	AIDA::IHistogram1D *_h_AntiDijetEtaDiff_3jet[2];
+	AIDA::IHistogram1D *_h_AntiDijetEtaDiff_4jet[2];
+	AIDA::IHistogram1D *_h_AntiDijetPhiDiff_2jet[2];
+	AIDA::IHistogram1D *_h_AntiDijetPhiDiff_3jet[2];
+	AIDA::IHistogram1D *_h_AntiDijetPhiDiff_4jet[2];
+	AIDA::IHistogram1D *_h_CutFlow[2];
+	AIDA::IHistogram1D *_h_NJetsNoCuts;
+	AIDA::IHistogram1D *_h_Mjj_0ex[2];
+	AIDA::IHistogram1D *_h_Mjj_1ex[2];
+	AIDA::IHistogram1D *_h_Mjj_2ex[2];
+	AIDA::IHistogram1D *_h_Mjj_3ex[2];
+	AIDA::IHistogram1D *_h_Mjj_4ex[2];
+	AIDA::IHistogram1D *_h_Mjj_5ex[2];
+	AIDA::IHistogram1D *_h_Mjj_6ex[2];
+	AIDA::IHistogram1D *_h_Mjj_7ex[2];
+	AIDA::IHistogram1D *_h_Mjj_8ex[2];
+	AIDA::IHistogram1D *_h_Mjj_9ex[2];
+	AIDA::IHistogram1D *_h_Mjj_10ex[2];
     //@}
 
 

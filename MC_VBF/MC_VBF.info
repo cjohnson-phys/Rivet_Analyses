@@ -1,0 +1,12 @@
+Name: MC_VBF
+Summary: MC validation observables for VBF processes
+Status: UNVALIDATED
+Authors:
+ - Jim Henderson
+References:
+RunInfo:
+  $e \, \nu$ + jets analysis.
+NumEvents: 1000000
+PtCuts: [0]
+Description: Validation for VBF observables - created with a view to comparing various aTGC points.
+NeedCrossSection: yes
