@@ -37,31 +37,13 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
-
+        
       FinalState fs;
-      IdentifiedFinalState allleptons;
-      allleptons.acceptIdPair(PID::ELECTRON);
-      allleptons.acceptIdPair(PID::MUON);
-      std::vector<std::pair<double, double> > etaRanges;
-      etaRanges.push_back(make_pair(-2.4, 2.4));                                    // lepton |eta| < 2.4
-      DressedLeptons leptons(fs, allleptons, 0.1, true, etaRanges, 25.0*GeV);        // pT_min of lepton is 25.0*GeV
-      addProjection(leptons, "leptons");
-      
-      // Leading neutrinos for Etmiss
-      LeadingParticlesFinalState neutrinos(fs);
-      neutrinos.addParticleIdPair(PID::NU_E);
-      neutrinos.addParticleIdPair(PID::NU_MU);
-      neutrinos.setLeadingOnly(true);
-      addProjection(neutrinos, "neutrinos");
-      
-      // Input for the jets: "Neutrinos, electrons, and muons from decays of the
-      // massive W boson were not used"
-      VetoedFinalState veto;
-      veto.addVetoOnThisFinalState(leptons);
-      veto.addVetoOnThisFinalState(neutrinos);
-      FastJets jets(veto, FastJets::ANTIKT, 0.4);
-      jets.useInvisibles(true);
-      addProjection(jets, "jets");
+      WFinder wfinder(fs, -2.5, 2.5, 25.0*GeV, PID::MUON, 60.0*GeV, 100.0*GeV, 25.0*GeV, 0.2);
+      addProjection(wfinder, "WFinder");
+      FastJets jets( wfinder.remainingFinalState() , FastJets::ANTIKT, 0.4);
+      jets.useInvisibles();
+      addProjection(jets, "Jets_w");
 
       for (size_t i=0; i<2; ++i) {
         // New Histograms defined here (must book them here and define them in .plots file.)
@@ -106,8 +88,8 @@ namespace Rivet {
         _h_AntiDijetPhiDiff_2jet[i] = bookHisto1D("AntiDijetPhiDiff_2jet_"+String,20,-1.0,1.0);
         _h_AntiDijetPhiDiff_3jet[i] = bookHisto1D("AntiDijetPhiDiff_3jet_"+String,20,-1.0,1.0);
         _h_AntiDijetPhiDiff_4jet[i] = bookHisto1D("AntiDijetPhiDiff_4jet_"+String,20,-1.0,1.0);
-	    _h_CutFlow[i] = bookHisto1D("CutFlow_"+String,12,0.0,12.0);
-        // Need weight vs. pT1, pT2, DijetMass
+	    _h_CutFlow[i] = bookHisto1D("CutFlow_"+String,10,0.0,10.0);
+        _h_WeightCutFlow[i] = bookHisto1D("WeightCutFlow_"+String,10,0.0,10.0);
 		
 		_h_Mjj_0ex[i] = bookHisto1D("Mjj_Excl_00_Jet_"+String,200,0.0,5000.0);
 		_h_Mjj_1ex[i] = bookHisto1D("Mjj_Excl_01_Jet_"+String,200,0.0,5000.0);
@@ -123,6 +105,9 @@ namespace Rivet {
 
       }
 	  
+      _h_Weight_vs_pT1 = bookScatter2D("Weight_vs_pT1",100.0,0.0,1000.0);
+      _h_Weight_vs_pT2 = bookScatter2D("Weight_vs_pT2",100.0,0.0,1000.0);
+      _h_Weight_vs_Mjj = bookScatter2D("Weight_vs_Mjj",500.0,0.0,5000.0);
 	  _h_NJetsNoCuts = bookHisto1D("NJetsNoCuts",20.0,0.0,20.0);
     }
 	
@@ -132,35 +117,21 @@ namespace Rivet {
 	  TotWeight+=weight;
 	  _h_CutFlow[0]->fill(1.0);
 	  _h_CutFlow[1]->fill(1.0);
-
-        // Lepton Projection
-        const vector<ClusteredLepton>& leptons = applyProjection<DressedLeptons>(event, "leptons").clusteredLeptons();
-        ParticleVector neutrinos = applyProjection<FinalState>(event, "neutrinos").particlesByPt();
+      _h_WeightCutFlow[0]->fill(1.0,weight);
+      _h_WeightCutFlow[1]->fill(1.0,weight);
       
-        // W/Lepton Selection
-        if (leptons.size()!=1 || (neutrinos.size()==0)) {                // Keep events with exactly one lepton and at least one paired neutrino
-          vetoEvent;
-        }
-        _h_CutFlow[0]->fill(2.0);
-        _h_CutFlow[1]->fill(2.0);
+      FourMomentum boson, lepton, neutrino, second_lepton;
+      const WFinder& wfinder = applyProjection<WFinder>(event, "WFinder");
+      const FastJets& jetpro = applyProjection<FastJets>(event, "Jets_w");
+      if ( wfinder.bosons().size() == 1 ){
+            boson    = wfinder.bosons().front().momentum();
+            lepton   = wfinder.constituentLeptons().front().momentum();
+            neutrino = wfinder.constituentNeutrinos().front().momentum();
+         }
+      else 
+            vetoEvent;
       
-        FourMomentum lepton = leptons[0].momentum();
-        FourMomentum p_miss = neutrinos[0].momentum();
-        if (p_miss.Et()<25.0*GeV) {                                    // MET must be greater than 25.0*GeV
-          vetoEvent;
-        }
-        _h_CutFlow[0]->fill(3.0);
-        _h_CutFlow[1]->fill(3.0);
-      
-      double mT=sqrt(2.0*lepton.pT()*p_miss.Et()*(1.0-cos(lepton.phi()-p_miss.phi())));
-      if (mT<40.0*GeV) {											// mT(W) must be greater than 40.0*GeV
-        vetoEvent;
-      }
-      _h_CutFlow[0]->fill(4.0);
-	  _h_CutFlow[1]->fill(4.0);
-
       // Jet Projection (only cares about jets with pT > 20 GeV)
-      const FastJets& jetpro = applyProjection<FastJets>(event, "jets");
       vector<FourMomentum> jets;
       foreach (const Jet& jet, jetpro.jetsByPt(20.0*GeV)) {
         if ( fabs(jet.momentum().rapidity()) > 4.4 ) continue;
@@ -168,30 +139,52 @@ namespace Rivet {
         jets.push_back(jet.momentum());
       }
       _h_NJetsNoCuts->fill(jets.size());
-	
+      
       // Jet Selection	
       if (jets.size() < 2) vetoEvent;								// Keep dijet events only
-      _h_CutFlow[0]->fill(5.0);
-	  _h_CutFlow[1]->fill(5.0);
-      if (jets[0].pT() < 80*GeV) vetoEvent;							// pT_1 must be greater than 80*GeV
-      _h_CutFlow[0]->fill(6.0);
-	  _h_CutFlow[1]->fill(6.0);
-      if (jets[1].pT() < 60*GeV) vetoEvent;							// pT_2 must be greater than 60*GeV
-      _h_CutFlow[0]->fill(7.0);
-	  _h_CutFlow[1]->fill(7.0);
-
+      _h_CutFlow[0]->fill(2.0);
+	  _h_CutFlow[1]->fill(2.0);
+      _h_WeightCutFlow[0]->fill(2.0,weight);
+      _h_WeightCutFlow[1]->fill(2.0,weight);
+      
+      double mT = sqrt(2.0*lepton.pT()*neutrino.Et()*(1.0-cos(lepton.phi()-neutrino.phi())));
       double dijet_mass2 = FourMomentum(jets[0]+jets[1]).mass2();
       if (dijet_mass2 < 0.0) vetoEvent;								// Veto events with negative m_jj^2
       double dijet_mass = sqrt(dijet_mass2);
+      _h_Weight_vs_pT1->addPoint(jets[0].pT(),weight);
+      _h_Weight_vs_pT2->addPoint(jets[1].pT(),weight);
+      _h_Weight_vs_Mjj->addPoint(dijet_mass,weight);
+      
+      if (mT<40.0*GeV) vetoEvent;									// mT(W) must be greater than 40.0*GeV
+      _h_CutFlow[0]->fill(3.0);
+	  _h_CutFlow[1]->fill(3.0);
+      _h_WeightCutFlow[0]->fill(3.0,weight);
+      _h_WeightCutFlow[1]->fill(3.0,weight);
+	
+      if (jets[0].pT() < 80*GeV) vetoEvent;							// pT_1 must be greater than 80*GeV
+      _h_CutFlow[0]->fill(4.0);
+	  _h_CutFlow[1]->fill(4.0);
+      _h_WeightCutFlow[0]->fill(4.0,weight);
+      _h_WeightCutFlow[1]->fill(4.0,weight);
+      if (jets[1].pT() < 60*GeV) vetoEvent;							// pT_2 must be greater than 60*GeV
+      _h_CutFlow[0]->fill(5.0);
+	  _h_CutFlow[1]->fill(5.0);
+      _h_WeightCutFlow[0]->fill(5.0,weight);
+      _h_WeightCutFlow[1]->fill(5.0,weight);
+
       if (dijet_mass < 500.0*GeV) vetoEvent;						// Veto event with m_jj < 500*GeV
-      _h_CutFlow[0]->fill(8.0);
-	  _h_CutFlow[1]->fill(8.0);
+      _h_CutFlow[0]->fill(6.0);
+	  _h_CutFlow[1]->fill(6.0);
+      _h_WeightCutFlow[0]->fill(6.0,weight);
+      _h_WeightCutFlow[1]->fill(6.0,weight);
+      
+      
 
       double jetcuts[] = {30.0*GeV, 20.0*GeV};						// All jets should be greater than 30*GeV (20*GeV)
       for (size_t i=0; i<2; ++i) {
         vector<FourMomentum> jets;
         vector<FourMomentum> jetsByEta;
-        double HT=lepton.pT()+p_miss.pT();
+        double HT=lepton.pT()+neutrino.pT();
         foreach (const Jet& jet, jetpro.jetsByPt(jetcuts[i])) {
           if (fabs(jet.momentum().rapidity())<4.4) {
             jets.push_back(jet.momentum());
@@ -212,19 +205,8 @@ namespace Rivet {
                   vetoEvent;
           }
         }
-  //        size_t nojets = jets.size();
-  //        double margin = 0.4; // akt4
-  //        for (size_t j=2;j<nojets;++j) {
-  //          if ( nojets>=3 && jets[j].pT()>jetcuts[i] &&
-  //             (
-  //             ( jets[j].rapidity()<jets[0].rapidity()-margin && jets[j].rapidity()>jets[1].rapidity()+margin ) ||
-  //             ( jets[j].rapidity()>jets[0].rapidity()+margin && jets[j].rapidity()<jets[1].rapidity()-margin )
-  //             )
-  //             ) {
-  //                  vetoEvent;
-  //          }
-  //        }
-        _h_CutFlow[i]->fill(9.0);
+        _h_CutFlow[i]->fill(7.0);
+        _h_WeightCutFlow[i]->fill(7.0,weight);
 	
         // Outside Lepton Veto (Vetos any event with leptons outside of the Etas of the two leading jets)
         bool outsideLeptonVeto = true;
@@ -237,7 +219,8 @@ namespace Rivet {
                outsideLeptonVeto = false;
   			 vetoEvent;
         }
-        _h_CutFlow[i]->fill(10.0);
+        _h_CutFlow[i]->fill(8.0);
+        _h_WeightCutFlow[i]->fill(8.0,weight);
           
         sort(jetsByEta.begin(),jetsByEta.end(),cmpMomByDescPseudorapidity);		// Sorts Jet list by Pseudorapidity
         double antidijet_mass2 = FourMomentum(jetsByEta.front()+jetsByEta.back()).mass2();
@@ -445,6 +428,7 @@ namespace Rivet {
     Histo1DPtr _h_AntiDijetPhiDiff_3jet[2];
     Histo1DPtr _h_AntiDijetPhiDiff_4jet[2];
 	Histo1DPtr _h_CutFlow[2];
+    Histo1DPtr _h_WeightCutFlow[2];
     Histo1DPtr _h_NJetsNoCuts;
 	Histo1DPtr _h_Mjj_0ex[2];
 	Histo1DPtr _h_Mjj_1ex[2];
@@ -457,12 +441,13 @@ namespace Rivet {
 	Histo1DPtr _h_Mjj_8ex[2];
 	Histo1DPtr _h_Mjj_9ex[2];
 	Histo1DPtr _h_Mjj_10ex[2];
+    Scatter2DPtr _h_Weight_vs_pT1;
+    Scatter2DPtr _h_Weight_vs_pT2;
+    Scatter2DPtr _h_Weight_vs_Mjj;
     //@}
 
 
   };
-
-
 
   // The hook for the plugin system
   DECLARE_RIVET_PLUGIN(WJETS_SYST_NEWANALYSIS);

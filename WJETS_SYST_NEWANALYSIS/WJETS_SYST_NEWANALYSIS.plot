@@ -8,17 +8,6 @@ RatioPlotYMin=0.0
 RatioPlotYMax=2.0
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/RatioNJetExcl_[12]
-Title=Jet Multiplicity Ratio
-XLabel=$N_{\text{jet}}$
-YLabel=$\sigma(\geq N_{\text{jet}}\;\text{jets})/\sigma(\geq N_{\text{jet}}-1\;\text{jets})$
-LogY=0
-RatioPlot=0
-XMajorTickMarks=10
-XMinorTickMarks=0
-LegendYPos=0.5
-# END PLOT
-
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/FirstJetPt_2jet_[12]
 Title=First Jet $p_\perp$ ($W+\geq 2$ jets)
 XLabel=$p_\perp$ [GeV]
@@ -380,13 +369,19 @@ XLabel=Cut
 YLabel=Events
 # END PLOT
 
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WeightCutFlow_[12]
+Title=Weighted Cut Flow
+XLabel=Cut
+YLabel=Events
+# END PLOT
+
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/NJetsNoCuts
 Title=Number of Jets in Event
 XLabel=NJets
 YLabel=Events
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_00_Jet[12]
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_00_Jet_[12]
 Title=Dijet Mass ($W+0$ jets)
 XLabel=$m_{jj}$ [GeV]
 YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
@@ -396,7 +391,7 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_01_Jet[12]
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_01_Jet_[12]
 Title=Dijet Mass ($W+1$ jets)
 XLabel=$m_{jj}$ [GeV]
 YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
@@ -406,7 +401,7 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_02_Jet[12]
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_02_Jet_[12]
 Title=Dijet Mass ($W+2$ jets)
 XLabel=$m_{jj}$ [GeV]
 YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
@@ -416,7 +411,7 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_03_Jet[12]
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_03_Jet_[12]
 Title=Dijet Mass ($W+3$ jets)
 XLabel=$m_{jj}$ [GeV]
 YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
@@ -426,7 +421,7 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_04_Jet[12]
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_04_Jet_[12]
 Title=Dijet Mass ($W+4$ jets)
 XLabel=$m_{jj}$ [GeV]
 YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
@@ -436,7 +431,7 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_05_Jet[12]
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_05_Jet_[12]
 Title=Dijet Mass ($W+5$ jets)
 XLabel=$m_{jj}$ [GeV]
 YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
@@ -446,7 +441,7 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_06_Jet[12]
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_06_Jet_[12]
 Title=Dijet Mass ($W+6$ jets)
 XLabel=$m_{jj}$ [GeV]
 YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
@@ -456,7 +451,7 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_07_Jet[12]
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_07_Jet_[12]
 Title=Dijet Mass ($W+7$ jets)
 XLabel=$m_{jj}$ [GeV]
 YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
@@ -466,7 +461,7 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_08_Jet[12]
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_08_Jet_[12]
 Title=Dijet Mass ($W+8$ jets)
 XLabel=$m_{jj}$ [GeV]
 YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
@@ -476,7 +471,7 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_09_Jet[12]
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_09_Jet_[12]
 Title=Dijet Mass ($W+9$ jets)
 XLabel=$m_{jj}$ [GeV]
 YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
@@ -486,7 +481,7 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_10_Jet[12]
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Mjj_Excl_10_Jet_[12]
 Title=Dijet Mass ($W+10$ jets)
 XLabel=$m_{jj}$ [GeV]
 YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
@@ -494,4 +489,22 @@ LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
 LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Weight_vs_pT1
+Title=Event Weight vs. Leading Jet pT
+XLabel=$P_T$ [GeV]
+YLabel=Weight
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Weight_vs_pT2
+Title=Event Weight vs. Sub-Leading Jet pT
+XLabel=$P_T$ [GeV]
+YLabel=Weight
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Weight_vs_Mjj
+Title=Event Weight vs. Dijet Mass
+XLabel=$m_{jj}$ [GeV]
+YLabel=Weight
 # END PLOT
