@@ -45,7 +45,7 @@ namespace Rivet {
       jets.useInvisibles();
       addProjection(jets, "Jets_w");
 
-      for (size_t i=0; i<2; ++i) {
+      for (size_t i=0; i<1; ++i) {
         // New Histograms defined here (must book them here and define them in .plots file.)
         string String = static_cast<ostringstream*>( &(ostringstream() << i+1) )->str();
 		
@@ -133,7 +133,7 @@ namespace Rivet {
       
       // Jet Projection (only cares about jets with pT > 20 GeV)
       vector<FourMomentum> jets;
-      foreach (const Jet& jet, jetpro.jetsByPt(20.0*GeV)) {
+      foreach (const Jet& jet, jetpro.jetsByPt(30.0*GeV)) {
         if ( fabs(jet.momentum().rapidity()) > 4.4 ) continue;
         if ( fabs(deltaR(jet, lepton)) < 0.3 ) continue;
         jets.push_back(jet.momentum());
@@ -181,7 +181,7 @@ namespace Rivet {
       
 
       double jetcuts[] = {30.0*GeV, 20.0*GeV};						// All jets should be greater than 30*GeV (20*GeV)
-      for (size_t i=0; i<2; ++i) {
+      for (size_t i=0; i<1; ++i) {
         vector<FourMomentum> jets;
         vector<FourMomentum> jetsByEta;
         double HT=lepton.pT()+neutrino.pT();
@@ -313,7 +313,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (size_t i=0; i<2; ++i) {
+      for (size_t i=0; i<1; ++i) {
 
         // scale all histos to the cross section
 		cout << crossSection() << endl << sumOfWeights();

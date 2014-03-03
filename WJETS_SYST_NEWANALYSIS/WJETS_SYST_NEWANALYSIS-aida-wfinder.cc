@@ -45,7 +45,7 @@ namespace Rivet {
       jets.useInvisibles();
       addProjection(jets, "Jets_w");
 
-      for (size_t i=0; i<2; ++i) {
+      for (size_t i=0; i<1; ++i) {
         // New Histograms defined here (must book them here and define them in .plots file.)
         string String = static_cast<ostringstream*>( &(ostringstream() << i+1) )->str();
 		
@@ -105,6 +105,9 @@ namespace Rivet {
 
       }
 	  
+      _h_Weight_vs_pT1 = bookDataPointSet("Weight_vs_pT1",100.0,0.0,1000.0);
+      _h_Weight_vs_pT2 = bookDataPointSet("Weight_vs_pT2",100.0,0.0,1000.0);
+      _h_Weight_vs_Mjj = bookDataPointSet("Weight_vs_Mjj",500.0,0.0,5000.0);
 	  _h_NJetsNoCuts = bookHistogram1D("NJetsNoCuts",20.0,0.0,20.0);
     }
 	
@@ -128,30 +131,36 @@ namespace Rivet {
       else 
             vetoEvent;
 
-      double mT=sqrt(2.0*lepton.pT()*neutrino.Et()*(1.0-cos(lepton.phi()-neutrino.phi())));
-      if (mT<40.0*GeV) {											// mT(W) must be greater than 40.0*GeV
-        vetoEvent;
-      }
-      _h_CutFlow[0]->fill(2.0);
-	  _h_CutFlow[1]->fill(2.0);
-      _h_WeightCutFlow[0]->fill(2.0,weight);
-      _h_WeightCutFlow[1]->fill(2.0,weight);
-
-      // Jet Projection (only cares about jets with pT > 20 GeV)
+      // Jet Projection (only cares about jets with pT > 30 GeV)
       vector<FourMomentum> jets;
-      foreach (const Jet& jet, jetpro.jetsByPt(20.0*GeV)) {
+      foreach (const Jet& jet, jetpro.jetsByPt(30.0*GeV)) {
           if ( fabs(jet.momentum().rapidity()) > 4.4 ) continue;
           if ( fabs(deltaR(jet, lepton)) < 0.3 ) continue;
           jets.push_back(jet.momentum());
       }
       _h_NJetsNoCuts->fill(jets.size());
-	
-      // Jet Selection	
+      
       if (jets.size() < 2) vetoEvent;								// Keep dijet events only
+      _h_CutFlow[0]->fill(2.0);
+	  _h_CutFlow[1]->fill(2.0);
+      _h_WeightCutFlow[0]->fill(2.0,weight);
+      _h_WeightCutFlow[1]->fill(2.0,weight);
+      
+      double mT=sqrt(2.0*lepton.pT()*neutrino.Et()*(1.0-cos(lepton.phi()-neutrino.phi())));
+      double dijet_mass2 = FourMomentum(jets[0]+jets[1]).mass2();
+      if (dijet_mass2 < 0.0) vetoEvent;								// Veto events with negative m_jj^2
+      double dijet_mass = sqrt(dijet_mass2);
+      _h_Weight_vs_pT1->setCoordinate(jets[0].pT(),weight);
+      _h_Weight_vs_pT2->setCoordinate(jets[1].pT(),weight);
+      _h_Weight_vs_Mjj->setCoordinate(dijet_mass,weight);
+      
+      if (mT<40.0*GeV) vetoEvent;									// mT(W) must be greater than 40.0*GeV
       _h_CutFlow[0]->fill(3.0);
 	  _h_CutFlow[1]->fill(3.0);
       _h_WeightCutFlow[0]->fill(3.0,weight);
       _h_WeightCutFlow[1]->fill(3.0,weight);
+	
+      // Jet Selection	
       if (jets[0].pT() < 80*GeV) vetoEvent;							// pT_1 must be greater than 80*GeV
       _h_CutFlow[0]->fill(4.0);
 	  _h_CutFlow[1]->fill(4.0);
@@ -163,9 +172,6 @@ namespace Rivet {
       _h_WeightCutFlow[0]->fill(5.0,weight);
       _h_WeightCutFlow[1]->fill(5.0,weight);
 
-      double dijet_mass2 = FourMomentum(jets[0]+jets[1]).mass2();
-      if (dijet_mass2 < 0.0) vetoEvent;								// Veto events with negative m_jj^2
-      double dijet_mass = sqrt(dijet_mass2);
       if (dijet_mass < 500.0*GeV) vetoEvent;						// Veto event with m_jj < 500*GeV
       _h_CutFlow[0]->fill(6.0);
 	  _h_CutFlow[1]->fill(6.0);
@@ -173,7 +179,7 @@ namespace Rivet {
       _h_WeightCutFlow[1]->fill(6.0,weight);
 
       double jetcuts[] = {30.0*GeV, 20.0*GeV};						// All jets should be greater than 30*GeV (20*GeV)
-      for (size_t i=0; i<2; ++i) {
+      for (size_t i=0; i<1; ++i) {
         vector<FourMomentum> jets;
         vector<FourMomentum> jetsByEta;
         double HT=lepton.pT()+neutrino.pT();
@@ -305,7 +311,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      for (size_t i=0; i<2; ++i) {
+      for (size_t i=0; i<1; ++i) {
 
         // scale all histos to the cross section
 		cout << crossSection() << endl << sumOfWeights();
@@ -432,6 +438,9 @@ namespace Rivet {
 	AIDA::IHistogram1D *_h_Mjj_8ex[2];
 	AIDA::IHistogram1D *_h_Mjj_9ex[2];
 	AIDA::IHistogram1D *_h_Mjj_10ex[2];
+    AIDA::IDataPointSet *_h_Weight_vs_pT1;
+    AIDA::IDataPointSet *_h_Weight_vs_pT2;
+    AIDA::IDataPointSet *_h_Weight_vs_Mjj;
     //@}
 
 
