@@ -491,6 +491,16 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonPt_[12]
+Title=W Boson Transverse Momentum
+XLabel=$W(p_T)$ [GeV]
+YLabel=d$\sigma$/d$p_T$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Weight_vs_pT1
 Title=Event Weight vs. Leading Jet pT
 XLabel=$P_T$ [GeV]
@@ -507,4 +517,70 @@ YLabel=Weight
 Title=Event Weight vs. Dijet Mass
 XLabel=$m_{jj}$ [GeV]
 YLabel=Weight
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/DijetMass_nocuts
+Title=Dijet Mass ($W+\geq 2$ jets) - No Cuts
+XLabel=$m_{jj}$ [GeV]
+YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/FirstJetPt_nocuts
+Title=First Jet $p_\perp$ - No Cuts
+XLabel=$p_\perp$ [GeV]
+YLabel=d$\sigma$/d$p_\perp$ [pb/GeV]
+RatioPlotYMin=0.35
+RatioPlotYMax=1.99
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/SecondJetPt_nocuts
+Title=Second Jet $p_\perp$ - No Cuts
+XLabel=$p_\perp$ [GeV]
+YLabel=d$\sigma$/d$p_\perp$ [pb/GeV]
+RatioPlotYMin=0.35
+RatioPlotYMax=1.99
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/BosonPt_nocuts
+Title=W Boson Transverse Momentum - No Cuts
+XLabel=$W(p_T)$ [GeV]
+YLabel=d$\sigma$/d$p_T$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/DijetMass_CR_antiJ3C_[12]
+Title=Dijet Mass in !J3C
+XLabel=$m_{jj}$ [GeV]
+YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/DijetMass_CR_LC_[12]
+Title=Dijet Mass in LC Region but Pre-J3C
+XLabel=$m_{jj}$ [GeV]
+YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/DijetMass_CR_antiLC_[12]
+Title=Dijet Mass in !LC Region but Pre-J3C
+XLabel=$m_{jj}$ [GeV]
+YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
 # END PLOT
