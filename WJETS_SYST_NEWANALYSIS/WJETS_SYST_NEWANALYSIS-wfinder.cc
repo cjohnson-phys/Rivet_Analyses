@@ -16,6 +16,8 @@ double TotWeight = 0;
 
 namespace Rivet {
 
+    using namespace Cuts;
+
   class WJETS_SYST_NEWANALYSIS : public Analysis {
   public:
 
@@ -39,7 +41,7 @@ namespace Rivet {
     void init() {
         
       FinalState fs;
-      WFinder wfinder(fs, -2.5, 2.5, 25.0*GeV, PID::MUON, 60.0*GeV, 100.0*GeV, 25.0*GeV, 0.2);
+      WFinder wfinder(fs, etaIn(-2.5, 2.5) & (pT >= 25.0*GeV), PID::ELECTRON, 60.0*GeV, 100.0*GeV, 25.0*GeV, 0.2);
       addProjection(wfinder, "WFinder");
       FastJets jets( wfinder.remainingFinalState() , FastJets::ANTIKT, 0.4);
       jets.useInvisibles();
@@ -94,6 +96,13 @@ namespace Rivet {
         _h_DijetMassCR_antiJ3C[i] = bookHisto1D("DijetMass_CR_antiJ3C_"+String,200,0.0,5000.0);
         _h_DijetMassCR_LC[i] = bookHisto1D("DijetMass_CR_LC_"+String,200,0.0,5000.0);
         _h_DijetMassCR_antiLC[i] = bookHisto1D("DijetMass_CR_antiLC_"+String,200,0.0,5000.0);
+		_h_DijetMassCR_njetgap1[i] = bookHisto1D("DijetMass_CR_njetgap1_"+String,200,0.0,5000.0);
+		_h_DijetMassCR_njetgap2[i] = bookHisto1D("DijetMass_CR_njetgap2_"+String,200,0.0,5000.0);
+		_h_DijetMassCR_njetgap_g2[i] = bookHisto1D("DijetMass_CR_njetgap_g2_"+String,200,0.0,5000.0);
+		_h_DijetMassCR_njetgap2_1in[i] = bookHisto1D("DijetMass_CR_njetgap2_1in_"+String,200,0.0,5000.0);
+		_h_DijetMassCR_njetgap_g3_1in[i] = bookHisto1D("DijetMass_CR_njetgap_g3_1in_"+String,200,0.0,5000.0);
+		
+        _h_PtBal_vs_BosonPt[i] = bookHisto2D("pTbalvsBosonPt_"+String,50,0.0,500.0,50,0.0,500.0);
 		
 		_h_Mjj_0ex[i] = bookHisto1D("Mjj_Excl_00_Jet_"+String,200,0.0,5000.0);
 		_h_Mjj_1ex[i] = bookHisto1D("Mjj_Excl_01_Jet_"+String,200,0.0,5000.0);
@@ -106,17 +115,31 @@ namespace Rivet {
 		_h_Mjj_8ex[i] = bookHisto1D("Mjj_Excl_08_Jet_"+String,200,0.0,5000.0);
 		_h_Mjj_9ex[i] = bookHisto1D("Mjj_Excl_09_Jet_"+String,200,0.0,5000.0);
 		_h_Mjj_10ex[i] = bookHisto1D("Mjj_Excl_10_Jet_"+String,200,0.0,5000.0);
+        
+        // _h_W_v_Mjj_01[i] = bookHisto1D("Mjj_W_Bin01_"+String,200,0.0,5000.0);
+        // _h_W_v_Mjj_02[i] = bookHisto1D("Mjj_W_Bin02_"+String,200,0.0,5000.0);
+        // _h_W_v_Mjj_03[i] = bookHisto1D("Mjj_W_Bin03_"+String,200,0.0,5000.0);
+        // _h_W_v_Mjj_04[i] = bookHisto1D("Mjj_W_Bin04_"+String,200,0.0,5000.0);
+        // _h_W_v_Mjj_05[i] = bookHisto1D("Mjj_W_Bin05_"+String,200,0.0,5000.0);
+        // _h_W_v_Mjj_06[i] = bookHisto1D("Mjj_W_Bin06_"+String,200,0.0,5000.0);
+        // _h_W_v_Mjj_07[i] = bookHisto1D("Mjj_W_Bin07_"+String,200,0.0,5000.0);
+        // _h_W_v_Mjj_08[i] = bookHisto1D("Mjj_W_Bin08_"+String,200,0.0,5000.0);
+        // _h_W_v_Mjj_09[i] = bookHisto1D("Mjj_W_Bin09_"+String,200,0.0,5000.0);
+        // _h_W_v_Mjj_10[i] = bookHisto1D("Mjj_W_Bin10_"+String,200,0.0,5000.0);
 
       }
 	  
       _h_Weight_vs_pT1 = bookHisto1D("Weight_vs_pT1",100.0,0.0,1000.0);
       _h_Weight_vs_pT2 = bookHisto1D("Weight_vs_pT2",100.0,0.0,1000.0);
       _h_Weight_vs_Mjj = bookHisto1D("Weight_vs_Mjj",500.0,0.0,5000.0);
+      _h_WeightWJets = bookHisto1D("WeigthWJets",240,-120.0,120.0);
+      _h_WeightInVBF = bookHisto1D("WeigthInVBF",240,-120.0,120.0);
 	  _h_NJetsNoCuts = bookHisto1D("NJetsNoCuts",20.0,0.0,20.0);
       _h_DijetMass_nocuts = bookHisto1D("DijetMass_nocuts",200,0.0,5000.0);
       _h_FirstJetPt_nocuts = bookHisto1D("FirstJetPt_nocuts",50,0.0,500.0);
       _h_SecondJetPt_nocuts = bookHisto1D("SecondJetPt_nocuts",50,0.0,500.0);
       _h_BosonPt_nocuts = bookHisto1D("BosonPt_nocuts",50,0.0,500.0);
+      _h_PtBal_vs_BosonPt_nocuts = bookHisto2D("pTbalvsBosonPt_nocuts",50,0.0,500.0,50,0.0,500.0);
     }
 	
     /// Perform the per-event analysis
@@ -136,6 +159,7 @@ namespace Rivet {
          }
       else 
             vetoEvent;
+      _h_WeightWJets->fill(weight);
       
       // Jet Projection (only cares about jets with pT > 20 GeV)
       vector<FourMomentum> jets;
@@ -168,6 +192,8 @@ namespace Rivet {
       _h_FirstJetPt_nocuts->fill(jets[0].pT(),weight);
       _h_SecondJetPt_nocuts->fill(jets[1].pT(),weight);
       _h_BosonPt_nocuts->fill(boson.pT(),weight);
+      double pTbalance = fabs((jets[0]+jets[1]).pT())/(fabs(jets[0].pT())+fabs(jets[1].pT()));
+      _h_PtBal_vs_BosonPt_nocuts->fill(boson.pT(),pTbalance,weight);
       
       if (mT<40.0*GeV) vetoEvent;									// mT(W) must be greater than 40.0*GeV
       _h_CutFlow[0]->fill(3.0);
@@ -189,22 +215,40 @@ namespace Rivet {
       //double jetcuts[] = {30.0*GeV, 20.0*GeV};						// All jets should be greater than 30*GeV (20*GeV)
       for (size_t i=0; i<1; ++i) {
 		
-        // Third Jet Centrality Cut (Vetos any event that has a jet between Etas of the two leading jets
         size_t nojets = jets.size();
         bool passJet3Centrality = false;
         double jet_1_eta = jets[0].rapidity();
         double jet_2_eta = jets[1].rapidity();
+		
+		// Njets in Gap Control Regions info
+	    int njetsingap = 0;
+		int njetsoutgap = 0;
+	    for (int j=2; j<nojets; ++j) {
+	       double jetothergap = fabs(( jets[j].rapidity() - ((jet_1_eta + jet_2_eta)/2.0))/(jet_1_eta - jet_2_eta));
+	       if ( jetothergap < 0.4 ) njetsingap++;
+		   else njetsoutgap++;
+	    }
+		
+		// Third Jet Centrality Cut (Vetos any event that has a jet between Etas of the two leading jets
         if ( nojets < 3) passJet3Centrality = true;
         if ( nojets > 2 ) {
-            double jet_3_eta = jets[2].rapidity();
-            double jet3gap = fabs(( jet_3_eta - ((jet_1_eta + jet_2_eta)/2.0))/(jet_1_eta - jet_2_eta));
-            if ( jet3gap > 0.4 ) passJet3Centrality = true;
+			for (size_t j=2; j<nojets; ++j) {
+	            double jet_3_eta = jets[j].rapidity();
+	            double jet3gap = fabs(( jet_3_eta - ((jet_1_eta + jet_2_eta)/2.0))/(jet_1_eta - jet_2_eta));
+	            if ( jet3gap >= 0.4 ) {
+					passJet3Centrality = true;
+				}
+				else {
+					passJet3Centrality = false;
+					break;
+				}
+			}
         }
         
         // Lepton Centrality Cut (Vetos any event with leptons outside of the Etas of the two leading jets)
         double lepton_eta = lepton.rapidity();
         double lep_cent = fabs((lepton_eta - ((jet_1_eta + jet_2_eta)/2.0) )/(jet_1_eta - jet_2_eta));
-        if ( lep_cent > 0.3 ) {
+		if ( lep_cent > 0.4 ) {
             if ( passJet3Centrality ) _h_DijetMassCR_antiLC[i]->fill(dijet_mass,weight);
             vetoEvent;
         }
@@ -218,8 +262,15 @@ namespace Rivet {
         }
         else {
             _h_DijetMassCR_antiJ3C[i]->fill(dijet_mass, weight);
+			// Njets in Gap Control Regions histograms (Passes OLV but not J3C)
+			if (njetsingap==1) _h_DijetMassCR_njetgap1[i]->fill(dijet_mass,weight);
+			if (njetsingap==2) _h_DijetMassCR_njetgap2[i]->fill(dijet_mass,weight);
+			if (njetsingap>2) _h_DijetMassCR_njetgap_g2[i]->fill(dijet_mass,weight);
+			if (njetsingap>=1 && nojets==4 && njetsoutgap<2) _h_DijetMassCR_njetgap2_1in[i]->fill(dijet_mass,weight);
+			if (njetsingap>=1 && nojets>4) _h_DijetMassCR_njetgap_g3_1in[i]->fill(dijet_mass,weight);
             vetoEvent;
         }
+        _h_WeightInVBF->fill(weight);
           
         sort(jetsByEta.begin(),jetsByEta.end(),cmpMomByDescPseudorapidity);		// Sorts Jet list by Pseudorapidity
         double antidijet_mass2 = FourMomentum(jetsByEta.front()+jetsByEta.back()).mass2();
@@ -227,6 +278,7 @@ namespace Rivet {
         double antidijet_phi_diff = cos(fabs(jetsByEta.front().phi()-jetsByEta.back().phi()));
         
         _h_WBosonPt[i]->fill(boson.pT(), weight);
+        _h_PtBal_vs_BosonPt[i]->fill(boson.pT(),pTbalance,weight);
 		
 		if (jets.size()==0) _h_Mjj_0ex[i]->fill(dijet_mass, weight);
 		
@@ -377,12 +429,19 @@ namespace Rivet {
 		scale(_h_Mjj_8ex[i], factor);
 		scale(_h_Mjj_9ex[i], factor);
 		scale(_h_Mjj_10ex[i], factor);
+		scale(_h_DijetMassCR_njetgap1[i], factor);
+		scale(_h_DijetMassCR_njetgap2[i], factor);
+		scale(_h_DijetMassCR_njetgap_g2[i], factor);
+		scale(_h_DijetMassCR_njetgap2_1in[i], factor);
+		scale(_h_DijetMassCR_njetgap_g3_1in[i], factor);
+        //scale(_h_PtBal_vs_BosonPt[i], factor);
         //normalize weightcutflow
       }
       scale(_h_DijetMass_nocuts, factor);
       scale(_h_FirstJetPt_nocuts, factor);
       scale(_h_SecondJetPt_nocuts, factor);
       scale(_h_BosonPt_nocuts, factor);
+      //scale(_h_PtBal_vs_BosonPt_nocuts, factor);
     }
 
     //@}
@@ -462,6 +521,16 @@ namespace Rivet {
     Histo1DPtr _h_DijetMassCR_antiJ3C[2];
     Histo1DPtr _h_DijetMassCR_LC[2];
     Histo1DPtr _h_DijetMassCR_antiLC[2];
+    Histo1DPtr _h_WeightWJets;
+    Histo1DPtr _h_WeightInVBF;
+	Histo1DPtr _h_DijetMassCR_njetgap1[2];
+	Histo1DPtr _h_DijetMassCR_njetgap2[2];
+	Histo1DPtr _h_DijetMassCR_njetgap_g2[2];
+	Histo1DPtr _h_DijetMassCR_njetgap2_1in[2];
+	Histo1DPtr _h_DijetMassCR_njetgap_g3_1in[2];
+
+    Histo2DPtr _h_PtBal_vs_BosonPt[2];
+    Histo2DPtr _h_PtBal_vs_BosonPt_nocuts;
     //@}
 
 

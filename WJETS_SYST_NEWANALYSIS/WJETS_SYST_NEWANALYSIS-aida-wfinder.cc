@@ -143,7 +143,7 @@ namespace Rivet {
       double HT=lepton.pT()+neutrino.pT();
       foreach (const Jet& jet, jetpro.jetsByPt(30.0*GeV)) {
           if ( fabs(jet.momentum().rapidity()) > 4.4 ) continue;
-          if ( fabs(deltaR(jet, lepton)) < 0.3 ) continue;
+          //if ( fabs(deltaR(jet, lepton)) < 0.3 ) continue;
           jets.push_back(jet.momentum());
           jetsByEta.push_back(jet.momentum());
           HT += jet.momentum().pT();

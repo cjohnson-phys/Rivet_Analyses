@@ -576,9 +576,29 @@ LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/DijetMass_CR_antiLC_[12]
-Title=Dijet Mass in !LC Region but Pre-J3C
+Title=Dijet Mass in !LC Region but Post-J3C
 XLabel=$m_{jj}$ [GeV]
 YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/pTbalvsBosonPt_[12]
+Title=$P_T$ Balance vs. Boson $P_T$
+XLabel=|$P_{T,1}-P_{T,2}$| [GeV]
+YLabel=Boson $P_T$ [GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/pTbalvsBosonPt_nocuts
+Title=$P_T$ Balance vs. Boson $P_T$
+XLabel=|$P_{T,1}-P_{T,2}$| [GeV]
+YLabel=Boson $P_T$ [GeV]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
