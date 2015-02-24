@@ -134,8 +134,11 @@ namespace Rivet {
             lepton   = wfinder.constituentLeptons().front().momentum();
             neutrino = wfinder.constituentNeutrinos().front().momentum();
          }
-      else 
-            vetoEvent;
+      else vetoEvent;
+	  
+	  if ( boson.pT() < 25.0*GeV ) vetoEvent;
+      _h_CutFlow[0]->fill(2.0);
+      _h_WeightCutFlow[0]->fill(2.0,weight);
 
       // Jet Projection (only cares about jets with pT > 30 GeV)
       vector<FourMomentum> jets;
@@ -151,8 +154,8 @@ namespace Rivet {
       _h_NJetsNoCuts->fill(jets.size());
       
       if (jets.size() < 2) vetoEvent;								// Keep dijet events only
-      _h_CutFlow[0]->fill(2.0);
-      _h_WeightCutFlow[0]->fill(2.0,weight);
+      _h_CutFlow[0]->fill(3.0);
+      _h_WeightCutFlow[0]->fill(3.0,weight);
       
       double mT=sqrt(2.0*lepton.pT()*neutrino.Et()*(1.0-cos(lepton.phi()-neutrino.phi())));
       double dijet_mass2 = FourMomentum(jets[0]+jets[1]).mass2();
@@ -169,20 +172,20 @@ namespace Rivet {
       _h_BosonPt_nocuts->fill(boson.pT(),weight);
 
       if (mT<40.0*GeV) vetoEvent;									// mT(W) must be greater than 40.0*GeV
-      _h_CutFlow[0]->fill(3.0);
-      _h_WeightCutFlow[0]->fill(3.0,weight);
-	
-      if (jets[0].pT() < 80*GeV) vetoEvent;							// pT_1 must be greater than 80*GeV
       _h_CutFlow[0]->fill(4.0);
       _h_WeightCutFlow[0]->fill(4.0,weight);
-      
-      if (jets[1].pT() < 60*GeV) vetoEvent;							// pT_2 must be greater than 60*GeV
+	
+      if (jets[0].pT() < 80*GeV) vetoEvent;							// pT_1 must be greater than 80*GeV
       _h_CutFlow[0]->fill(5.0);
       _h_WeightCutFlow[0]->fill(5.0,weight);
-
-      if (dijet_mass < 500.0*GeV) vetoEvent;						// Veto event with m_jj < 500*GeV
+      
+      if (jets[1].pT() < 60*GeV) vetoEvent;							// pT_2 must be greater than 60*GeV
       _h_CutFlow[0]->fill(6.0);
       _h_WeightCutFlow[0]->fill(6.0,weight);
+
+      if (dijet_mass < 500.0*GeV) vetoEvent;						// Veto event with m_jj < 500*GeV
+      _h_CutFlow[0]->fill(7.0);
+      _h_WeightCutFlow[0]->fill(7.0,weight);
 
       //double jetcuts[] = {30.0*GeV, 20.0*GeV};						// All jets should be greater than 30*GeV (20*GeV)
       for (size_t i=0; i<1; ++i) {
@@ -207,12 +210,12 @@ namespace Rivet {
               vetoEvent;
           }
           _h_DijetMassCR_LC[i]->fill(dijet_mass,weight);
-          _h_CutFlow[i]->fill(7.0);
-          _h_WeightCutFlow[i]->fill(7.0,weight);
+          _h_CutFlow[i]->fill(8.0);
+          _h_WeightCutFlow[i]->fill(8.0,weight);
         
           if ( passJet3Centrality ) {
-              _h_CutFlow[i]->fill(8.0);
-              _h_WeightCutFlow[i]->fill(8.0,weight);
+              _h_CutFlow[i]->fill(9.0);
+              _h_WeightCutFlow[i]->fill(9.0,weight);
           }
           else {
               _h_DijetMassCR_antiJ3C[i]->fill(dijet_mass, weight);

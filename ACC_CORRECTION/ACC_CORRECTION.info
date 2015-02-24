@@ -1,0 +1,19 @@
+Name: ACC_CORRECTION
+Year: 2015
+Summary: W+jets production at 8 TeV - Acceptance correction estimation
+Experiment: ATLAS
+Collider: LHC
+Status: UNVALIDATED
+Authors:
+ - Christian Johnson <christian.johnson@cern.ch>
+ - Julia Fischer <>
+RunInfo:
+  W+jet events in either the electron or the muon decay channel (but not both).
+NumEvents: 500000
+Beams: [p+, p+]
+Energies: [8000]
+PtCuts: [0]
+NeedCrossSection: True
+Description:
+  'Acceptance correction estimation for 8TeV VBF-W analysis.'
+

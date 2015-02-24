@@ -1,0 +1,3 @@
+#!/bin/bash
+
+rivet-buildplugin RivetACC_CORRECTION.so ACC_CORRECTION.cc -D__USE_XOPEN2K8

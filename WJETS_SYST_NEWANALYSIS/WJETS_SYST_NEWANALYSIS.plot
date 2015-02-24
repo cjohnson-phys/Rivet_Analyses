@@ -491,16 +491,6 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonPt_[12]
-Title=W Boson Transverse Momentum
-XLabel=$W(p_T)$ [GeV]
-YLabel=d$\sigma$/d$p_T$ [pb/GeV]
-LogY=0
-RatioPlotYMin=0.5
-RatioPlotYMax=1.5
-LegendXPos=0.05
-# END PLOT
-
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/Weight_vs_pT1
 Title=Event Weight vs. Leading Jet pT
 XLabel=$P_T$ [GeV]
@@ -599,6 +589,246 @@ LegendXPos=0.05
 Title=$P_T$ Balance vs. Boson $P_T$
 XLabel=|$P_{T,1}-P_{T,2}$| [GeV]
 YLabel=Boson $P_T$ [GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonPt_SR_[12]
+Title=W Boson Transverse Momentum
+XLabel=$W(p_T)$ [GeV]
+YLabel=d$\sigma$/d$p_T$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonEta_SR_[12]
+Title=W Boson Pseudorapidity
+XLabel=$W(\eta)$
+YLabel=d$\sigma$/d$\eta$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonPhi_SR_[12]
+Title=W Boson Azimuthal Angle
+XLabel=$W(\phi)$
+YLabel=d$\sigma$/d$\phi$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDPhi_SR_[12]
+Title=Minimum $\Delta\phi$ - Lepton to Jet
+XLabel=$\Delta\phi (l,jet)$
+YLabel=d$\sigma$/d$\Delta\phi$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinEta_SR_[12]
+Title=Minimum $\Delta\eta$ - Lepton to Jet
+XLabel=$W\Delta\eta (l,jet)$
+YLabel=d$\sigma$/d$\Delta\eta$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDR_SR_[12]
+Title=Minimum $\DeltaR$ - Lepton to Jet
+XLabel=$\DeltaR (l,jet)$
+YLabel=d$\sigma$/d$\DeltaR$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonPt_antiCJV_[12]
+Title=W Boson Transverse Momentum
+XLabel=$W(p_T)$ [GeV]
+YLabel=d$\sigma$/d$p_T$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonEta_antiCJV_[12]
+Title=W Boson Pseudorapidity
+XLabel=$W(\eta)$
+YLabel=d$\sigma$/d$\eta$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonPhi_antiCJV_[12]
+Title=W Boson Azimuthal Angle
+XLabel=$W(\phi)$
+YLabel=d$\sigma$/d$\phi$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDPhi_antiCJV_[12]
+Title=Minimum $\Delta\phi$ - Lepton to Jet
+XLabel=$\Delta\phi (l,jet)$
+YLabel=d$\sigma$/d$\Delta\phi$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinEta_antiCJV_[12]
+Title=Minimum $\Delta\eta$ - Lepton to Jet
+XLabel=$W\Delta\eta (l,jet)$
+YLabel=d$\sigma$/d$\Delta\eta$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDR_antiCJV_[12]
+Title=Minimum $\DeltaR$ - Lepton to Jet
+XLabel=$\DeltaR (l,jet)$
+YLabel=d$\sigma$/d$\DeltaR$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonPt_OLV_[12]
+Title=W Boson Transverse Momentum
+XLabel=$W(p_T)$ [GeV]
+YLabel=d$\sigma$/d$p_T$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonEta_OLV_[12]
+Title=W Boson Pseudorapidity
+XLabel=$W(\eta)$
+YLabel=d$\sigma$/d$\eta$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonPhi_OLV_[12]
+Title=W Boson Azimuthal Angle
+XLabel=$W(\phi)$
+YLabel=d$\sigma$/d$\phi$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDPhi_OLV_[12]
+Title=Minimum $\Delta\phi$ - Lepton to Jet
+XLabel=$\Delta\phi (l,jet)$
+YLabel=d$\sigma$/d$\Delta\phi$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinEta_OLV_[12]
+Title=Minimum $\Delta\eta$ - Lepton to Jet
+XLabel=$W\Delta\eta (l,jet)$
+YLabel=d$\sigma$/d$\Delta\eta$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDR_OLV_[12]
+Title=Minimum $\DeltaR$ - Lepton to Jet
+XLabel=$\DeltaR (l,jet)$
+YLabel=d$\sigma$/d$\DeltaR$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonPt_antiOLV_[12]
+Title=W Boson Transverse Momentum
+XLabel=$W(p_T)$ [GeV]
+YLabel=d$\sigma$/d$p_T$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonEta_antiOLV_[12]
+Title=W Boson Pseudorapidity
+XLabel=$W(\eta)$
+YLabel=d$\sigma$/d$\eta$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonPhi_antiOLV_[12]
+Title=W Boson Azimuthal Angle
+XLabel=$W(\phi)$
+YLabel=d$\sigma$/d$\phi$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDPhi_antiOLV_[12]
+Title=Minimum $\Delta\phi$ - Lepton to Jet
+XLabel=$\Delta\phi (l,jet)$
+YLabel=d$\sigma$/d$\Delta\phi$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinEta_antiOLV_[12]
+Title=Minimum $\Delta\eta$ - Lepton to Jet
+XLabel=$W\Delta\eta (l,jet)$
+YLabel=d$\sigma$/d$\Delta\eta$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDR_antiOLV_[12]
+Title=Minimum $\DeltaR$ - Lepton to Jet
+XLabel=$\DeltaR (l,jet)$
+YLabel=d$\sigma$/d$\DeltaR$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
