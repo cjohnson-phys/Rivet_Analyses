@@ -105,6 +105,12 @@ namespace Rivet {
 		_h_WtoJetMinDEta_SR[i] = bookHisto1D("WtoJetMinDEta_SR_"+String,200,0.0,10.0);
 		_h_WtoJetMinDR_SR[i] = bookHisto1D("WtoJetMinDR_SR_"+String,200,0.0,10.0);
 		_h_LeptoJetMinDR_SR[i] = bookHisto1D("LeptoJetMinDR_SR_"+String,200,0.0,10.0);
+		_h_ThirdJettoJetMinDR_SR[i] = bookHisto1D("ThirdJettoJetMinDR_SR_"+String,200,0.0,10.0);
+		_h_LeptonCentrality_SR[i] = bookHisto1D("LeptonCentrality_SR_"+String,50,0.0,1.0);
+		_h_DEtaJets_SR[i] = bookHisto1D("DeltaEtaJets_SR_"+String,100,0.0,10.0);
+		_h_DEtaJets_DEta2more_SR[i] = bookHisto1D("DeltaEtaJets_DEta2more_SR_"+String,100,0.0,10.0);
+		_h_DEtaJets_DEta2less_SR[i] = bookHisto1D("DeltaEtaJets_DEta2less_SR_"+String,100,0.0,10.0);
+		
         _h_WBosonPt_antiCJV[i] = bookHisto1D("WBosonPt_antiCJV_"+String,50,0.0,500.0);
 		_h_WBosonEta_antiCJV[i] = bookHisto1D("WBosonEta_antiCJV_"+String,100,-5.0,5.0);
 		_h_WBosonPhi_antiCJV[i] = bookHisto1D("WBosonPhi_antiCJV_"+String,64,0.0,2*pi);
@@ -112,6 +118,10 @@ namespace Rivet {
 		_h_WtoJetMinDEta_antiCJV[i] = bookHisto1D("WtoJetMinDEta_antiCJV_"+String,200,0.0,10.0);
 		_h_WtoJetMinDR_antiCJV[i] = bookHisto1D("WtoJetMinDR_antiCJV_"+String,200,0.0,10.0);
 		_h_LeptoJetMinDR_antiCJV[i] = bookHisto1D("LeptoJetMinDR_antiCJV_"+String,200,0.0,10.0);
+		_h_ThirdJettoJetMinDR_antiCJV[i] = bookHisto1D("ThirdJettoJetMinDR_antiCJV_"+String,200,0.0,10.0);
+		_h_LeptonCentrality_antiCJV[i] = bookHisto1D("LeptonCentrality_antiCJV_"+String,50,0.0,1.0);
+		_h_DEtaJets_antiCJV[i] = bookHisto1D("DeltaEtaJets_antiCJV_"+String,100,0.0,10.0);
+		
         _h_WBosonPt_OLV[i] = bookHisto1D("WBosonPt_OLV_"+String,50,0.0,500.0);
 		_h_WBosonEta_OLV[i] = bookHisto1D("WBosonEta_OLV_"+String,100,-5.0,5.0);
 		_h_WBosonPhi_OLV[i] = bookHisto1D("WBosonPhi_OLV_"+String,64,0.0,2*pi);
@@ -119,6 +129,10 @@ namespace Rivet {
 		_h_WtoJetMinDEta_OLV[i] = bookHisto1D("WtoJetMinDEta_OLV_"+String,200,0.0,10.0);
 		_h_WtoJetMinDR_OLV[i] = bookHisto1D("WtoJetMinDR_OLV_"+String,200,0.0,10.0);
 		_h_LeptoJetMinDR_OLV[i] = bookHisto1D("LeptoJetMinDR_OLV_"+String,200,0.0,10.0);
+		_h_ThirdJettoJetMinDR_OLV[i] = bookHisto1D("ThirdJettoJetMinDR_OLV_"+String,200,0.0,10.0);
+		_h_LeptonCentrality_OLV[i] = bookHisto1D("LeptonCentrality_OLV_"+String,50,0.0,1.0);
+		_h_DEtaJets_OLV[i] = bookHisto1D("DeltaEtaJets_OLV_"+String,100,0.0,10.0);
+		
         _h_WBosonPt_antiOLV[i] = bookHisto1D("WBosonPt_antiOLV_"+String,50,0.0,500.0);
 		_h_WBosonEta_antiOLV[i] = bookHisto1D("WBosonEta_antiOLV_"+String,100,-5.0,5.0);
 		_h_WBosonPhi_antiOLV[i] = bookHisto1D("WBosonPhi_antiOLV_"+String,64,0.0,2*pi);
@@ -126,6 +140,12 @@ namespace Rivet {
 		_h_WtoJetMinDEta_antiOLV[i] = bookHisto1D("WtoJetMinDEta_antiOLV_"+String,200,0.0,10.0);
 		_h_WtoJetMinDR_antiOLV[i] = bookHisto1D("WtoJetMinDR_antiOLV_"+String,200,0.0,10.0);
 		_h_LeptoJetMinDR_antiOLV[i] = bookHisto1D("LeptoJetMinDR_antiOLV_"+String,200,0.0,10.0);
+		_h_ThirdJettoJetMinDR_antiOLV[i] = bookHisto1D("ThirdJettoJetMinDR_antiOLV_"+String,200,0.0,10.0);
+		_h_LeptonCentrality_antiOLV[i] = bookHisto1D("LeptonCentrality_antiOLV_"+String,50,0.0,1.0);
+		_h_DEtaJets_antiOLV[i] = bookHisto1D("DeltaEtaJets_antiOLV_"+String,100,0.0,10.0);
+		_h_DEtaJets_DEta2more_antiOLV[i] = bookHisto1D("DeltaEtaJets_DEta2more_antiOLV_"+String,100,0.0,10.0);
+		_h_DEtaJets_DEta2less_antiOLV[i] = bookHisto1D("DeltaEtaJets_DEta2less_antiOLV_"+String,100,0.0,10.0);
+		
         _h_WBosonPt_antiCJVantiOLV[i] = bookHisto1D("WBosonPt_antiCJVantiOLV_"+String,50,0.0,500.0);
 		_h_WBosonEta_antiCJVantiOLV[i] = bookHisto1D("WBosonEta_antiCJVantiOLV_"+String,100,-5.0,5.0);
 		_h_WBosonPhi_antiCJVantiOLV[i] = bookHisto1D("WBosonPhi_antiCJVantiOLV_"+String,64,0.0,2*pi);
@@ -133,10 +153,18 @@ namespace Rivet {
 		_h_WtoJetMinDEta_antiCJVantiOLV[i] = bookHisto1D("WtoJetMinDEta_antiCJVantiOLV_"+String,200,0.0,10.0);
 		_h_WtoJetMinDR_antiCJVantiOLV[i] = bookHisto1D("WtoJetMinDR_antiCJVantiOLV_"+String,200,0.0,10.0);
 		_h_LeptoJetMinDR_antiCJVantiOLV[i] = bookHisto1D("LeptoJetMinDR_antiCJVantiOLV_"+String,200,0.0,10.0);
+		_h_ThirdJettoJetMinDR_antiCJVantiOLV[i] = bookHisto1D("ThirdJettoJetMinDR_antiCJVantiOLV_"+String,200,0.0,10.0);
+		_h_LeptonCentrality_antiCJVantiOLV[i] = bookHisto1D("LeptonCentrality_antiCJVantiOLV_"+String,50,0.0,1.0);
+		_h_DEtaJets_antiCJVantiOLV[i] = bookHisto1D("DeltaEtaJets_antiCJVantiOLV_"+String,100,0.0,10.0);
+		
         _h_DijetMassCR_antiCJV[i] = bookHisto1D("DijetMass_CR_antiCJV_"+String,200,0.0,5000.0);
         _h_DijetMassCR_OLV[i] = bookHisto1D("DijetMass_CR_OLV_"+String,200,0.0,5000.0);
         _h_DijetMassCR_antiOLV[i] = bookHisto1D("DijetMass_CR_antiOLV_"+String,200,0.0,5000.0);
 		_h_DijetMassCR_antiCJVantiOLV[i] = bookHisto1D("DijetMass_CR_antiCJVantiOLV_"+String,200,0.0,5000.0);
+		_h_DijetMassCR_antiOLV_DEta2more[i] = bookHisto1D("DijetMass_CR_antiOLV_DEta2more_"+String,200,0.0,5000.0);
+		_h_DijetMassCR_antiOLV_DEta2less[i] = bookHisto1D("DijetMass_CR_antiOLV_DEta2less_"+String,200,0.0,5000.0);
+		_h_DijetMassCR_SR_DEta2more[i] = bookHisto1D("DijetMass_CR_SR_DEta2more_"+String,200,0.0,5000.0);
+		_h_DijetMassCR_SR_DEta2less[i] = bookHisto1D("DijetMass_CR_SR_DEta2less_"+String,200,0.0,5000.0);
 		_h_DijetMassCR_njetgap1[i] = bookHisto1D("DijetMass_CR_njetgap1_"+String,200,0.0,5000.0);
 		_h_DijetMassCR_njetgap2[i] = bookHisto1D("DijetMass_CR_njetgap2_"+String,200,0.0,5000.0);
 		_h_DijetMassCR_njetgap_g2[i] = bookHisto1D("DijetMass_CR_njetgap_g2_"+String,200,0.0,5000.0);
@@ -253,6 +281,9 @@ namespace Rivet {
       if (dijet_mass < 500.0*GeV) vetoEvent;						// Veto event with m_jj < 500*GeV
       _h_CutFlow[0]->fill(6.0);
       _h_WeightCutFlow[0]->fill(6.0,weight);
+	  
+	  // double DeltaRap = fabs(jets[0].rapidity() - jets[1].rapidity());
+	  // if ( DeltaRap > 2.0 ) vetoEvent;
       
 	  double Wjet1Dphi = fabs(boson.phi() - jets[0].phi());
 	  double Wjet1Deta = fabs(boson.rapidity() - jets[0].rapidity());
@@ -262,6 +293,7 @@ namespace Rivet {
 	  double Wjet2DR = deltaR(boson, jets[1]);
 	  double LepJet1DR = deltaR(lepton, jets[0]);
 	  double LepJet2DR = deltaR(lepton, jets[1]);
+	  double Jets31DR, Jets32DR;
       
       //double jetcuts[] = {30.0*GeV, 20.0*GeV};						// All jets should be greater than 30*GeV (20*GeV)
       for (size_t i=0; i<1; ++i) {
@@ -270,6 +302,10 @@ namespace Rivet {
         bool passJet3Centrality = false;
         double jet_1_eta = jets[0].rapidity();
         double jet_2_eta = jets[1].rapidity();
+		
+		bool passDEtaCut = false;
+		double DeltaRap = fabs(jet_1_eta - jet_2_eta);
+		if ( DeltaRap > 2.0 ) { passDEtaCut = true; }
 		
 		// Njets in Gap Control Regions info
 	    int njetsingap = 0;
@@ -309,6 +345,21 @@ namespace Rivet {
 				_h_WtoJetMinDEta_antiOLV[i]->fill( (Wjet1Deta<Wjet2Deta ? Wjet1Deta : Wjet2Deta), weight);
 				_h_WtoJetMinDR_antiOLV[i]->fill( (Wjet1DR<Wjet2DR ? Wjet1DR : Wjet2DR), weight);
 				_h_LeptoJetMinDR_antiOLV[i]->fill( (LepJet1DR<LepJet2DR ? LepJet1DR : LepJet2DR), weight);
+				_h_LeptonCentrality_antiOLV[i]->fill(lep_cent, weight);
+				_h_DEtaJets_antiOLV[i]->fill(DeltaRap, weight);
+				if ( nojets > 2 ) { 
+					Jets31DR = deltaR(jets[0],jets[2]);
+					Jets32DR = deltaR(jets[1],jets[2]);
+					_h_ThirdJettoJetMinDR_antiOLV[i]->fill( (Jets31DR<Jets32DR ? Jets31DR : Jets32DR), weight);
+				}
+				if (passDEtaCut) {
+					_h_DijetMassCR_antiOLV_DEta2more[i]->fill(dijet_mass, weight);
+					_h_DEtaJets_DEta2more_antiOLV[i]->fill(DeltaRap, weight);
+				}
+				else {
+					_h_DijetMassCR_antiOLV_DEta2less[i]->fill(dijet_mass, weight);
+					_h_DEtaJets_DEta2less_antiOLV[i]->fill(DeltaRap, weight);
+				}
 			}
 			else {
 				_h_DijetMassCR_antiCJVantiOLV[i]->fill(dijet_mass,weight);
@@ -319,9 +370,17 @@ namespace Rivet {
 				_h_WtoJetMinDEta_antiCJVantiOLV[i]->fill( (Wjet1Deta<Wjet2Deta ? Wjet1Deta : Wjet2Deta), weight);
 				_h_WtoJetMinDR_antiCJVantiOLV[i]->fill( (Wjet1DR<Wjet2DR ? Wjet1DR : Wjet2DR), weight);
 				_h_LeptoJetMinDR_antiCJVantiOLV[i]->fill( (LepJet1DR<LepJet2DR ? LepJet1DR : LepJet2DR), weight);
-				vetoEvent;
+				_h_LeptonCentrality_antiCJVantiOLV[i]->fill(lep_cent, weight);
+				_h_DEtaJets_antiCJVantiOLV[i]->fill(DeltaRap,weight);
+				if ( nojets > 2 ) { 
+					Jets31DR = deltaR(jets[0],jets[2]);
+					Jets32DR = deltaR(jets[1],jets[2]);
+					_h_ThirdJettoJetMinDR_antiCJVantiOLV[i]->fill( (Jets31DR<Jets32DR ? Jets31DR : Jets32DR), weight);
+				}
 			}
+			vetoEvent;
         }
+		
         _h_DijetMassCR_OLV[i]->fill(dijet_mass,weight);
         _h_WBosonPt_OLV[i]->fill(boson.pT(), weight);
 		_h_WBosonEta_OLV[i]->fill(boson.rapidity(), weight);
@@ -330,6 +389,13 @@ namespace Rivet {
 		_h_WtoJetMinDEta_OLV[i]->fill( (Wjet1Deta<Wjet2Deta ? Wjet1Deta : Wjet2Deta), weight);
 		_h_WtoJetMinDR_OLV[i]->fill( (Wjet1DR<Wjet2DR ? Wjet1DR : Wjet2DR), weight);
 		_h_LeptoJetMinDR_OLV[i]->fill( (LepJet1DR<LepJet2DR ? LepJet1DR : LepJet2DR), weight);
+		_h_LeptonCentrality_OLV[i]->fill(lep_cent, weight);
+		_h_DEtaJets_OLV[i]->fill(DeltaRap, weight);
+		if ( nojets > 2 ) { 
+			Jets31DR = deltaR(jets[0],jets[2]);
+			Jets32DR = deltaR(jets[1],jets[2]);
+			_h_ThirdJettoJetMinDR_OLV[i]->fill( (Jets31DR<Jets32DR ? Jets31DR : Jets32DR), weight);
+		}
 		
         _h_CutFlow[i]->fill(7.0);
         _h_WeightCutFlow[i]->fill(7.0,weight);
@@ -347,6 +413,13 @@ namespace Rivet {
 			_h_WtoJetMinDEta_antiCJV[i]->fill( (Wjet1Deta<Wjet2Deta ? Wjet1Deta : Wjet2Deta), weight);
 			_h_WtoJetMinDR_antiCJV[i]->fill( (Wjet1DR<Wjet2DR ? Wjet1DR : Wjet2DR), weight);
 			_h_LeptoJetMinDR_antiCJV[i]->fill( (LepJet1DR<LepJet2DR ? LepJet1DR : LepJet2DR), weight);
+			_h_LeptonCentrality_antiCJV[i]->fill(lep_cent, weight);
+			_h_DEtaJets_antiCJV[i]->fill(DeltaRap, weight);
+			if ( nojets > 2 ) { 
+				Jets31DR = deltaR(jets[0],jets[2]);
+				Jets32DR = deltaR(jets[1],jets[2]);
+				_h_ThirdJettoJetMinDR_antiCJV[i]->fill( (Jets31DR<Jets32DR ? Jets31DR : Jets32DR), weight);
+			}
 			// Njets in Gap Control Regions histograms (Passes OLV but not J3C)
 			if (njetsingap==1) _h_DijetMassCR_njetgap1[i]->fill(dijet_mass,weight);
 			if (njetsingap==2) _h_DijetMassCR_njetgap2[i]->fill(dijet_mass,weight);
@@ -369,6 +442,21 @@ namespace Rivet {
 		_h_WtoJetMinDEta_SR[i]->fill( (Wjet1Deta<Wjet2Deta ? Wjet1Deta : Wjet2Deta), weight);
 		_h_WtoJetMinDR_SR[i]->fill( (Wjet1DR<Wjet2DR ? Wjet1DR : Wjet2DR), weight);
 		_h_LeptoJetMinDR_SR[i]->fill( (LepJet1DR<LepJet2DR ? LepJet1DR : LepJet2DR), weight);
+		_h_LeptonCentrality_SR[i]->fill(lep_cent, weight);
+		_h_DEtaJets_SR[i]->fill(DeltaRap, weight);
+		if ( nojets > 2 ) { 
+			Jets31DR = deltaR(jets[0],jets[2]);
+			Jets32DR = deltaR(jets[1],jets[2]);
+			_h_ThirdJettoJetMinDR_SR[i]->fill( (Jets31DR<Jets32DR ? Jets31DR : Jets32DR), weight);
+		}
+		if (passDEtaCut) {
+			_h_DijetMassCR_SR_DEta2more[i]->fill(dijet_mass, weight);
+			_h_DEtaJets_DEta2more_SR[i]->fill(DeltaRap, weight);
+		}
+		else {
+			_h_DijetMassCR_SR_DEta2less[i]->fill(dijet_mass, weight);
+			_h_DEtaJets_DEta2less_SR[i]->fill(DeltaRap, weight);
+		}
         //_h_PtBal_vs_BosonPt[i]->fill(boson.pT(),pTbalance,weight);
 		
 		if (jets.size()==0) _h_Mjj_0ex[i]->fill(dijet_mass, weight);
@@ -513,6 +601,12 @@ namespace Rivet {
 		scale(_h_WtoJetMinDEta_SR[i], factor);
 		scale(_h_WtoJetMinDR_SR[i], factor);
 		scale(_h_LeptoJetMinDR_SR[i], factor);
+		scale(_h_ThirdJettoJetMinDR_SR[i], factor);
+		scale(_h_LeptonCentrality_SR[i], factor);
+		scale(_h_DEtaJets_SR[i], factor);
+		scale(_h_DEtaJets_DEta2more_SR[i], factor);
+		scale(_h_DEtaJets_DEta2less_SR[i], factor);
+		
         scale(_h_WBosonPt_antiCJV[i], factor);
 		scale(_h_WBosonEta_antiCJV[i], factor);
 		scale(_h_WBosonPhi_antiCJV[i], factor);
@@ -520,6 +614,10 @@ namespace Rivet {
 		scale(_h_WtoJetMinDEta_antiCJV[i], factor);
 		scale(_h_WtoJetMinDR_antiCJV[i], factor);
 		scale(_h_LeptoJetMinDR_antiCJV[i], factor);
+		scale(_h_ThirdJettoJetMinDR_antiCJV[i], factor);
+		scale(_h_LeptonCentrality_antiCJV[i], factor);
+		scale(_h_DEtaJets_antiCJV[i], factor);
+		
         scale(_h_WBosonPt_OLV[i], factor);
 		scale(_h_WBosonEta_OLV[i], factor);
 		scale(_h_WBosonPhi_OLV[i], factor);
@@ -527,6 +625,10 @@ namespace Rivet {
 		scale(_h_WtoJetMinDEta_OLV[i], factor);
 		scale(_h_WtoJetMinDR_OLV[i], factor);
 		scale(_h_LeptoJetMinDR_OLV[i], factor);
+		scale(_h_ThirdJettoJetMinDR_OLV[i], factor);
+		scale(_h_LeptonCentrality_OLV[i], factor);
+		scale(_h_DEtaJets_OLV[i], factor);
+		
         scale(_h_WBosonPt_antiOLV[i], factor);
 		scale(_h_WBosonEta_antiOLV[i], factor);
 		scale(_h_WBosonPhi_antiOLV[i], factor);
@@ -534,6 +636,12 @@ namespace Rivet {
 		scale(_h_WtoJetMinDEta_antiOLV[i], factor);
 		scale(_h_WtoJetMinDR_antiOLV[i], factor);
 		scale(_h_LeptoJetMinDR_antiOLV[i], factor);
+		scale(_h_ThirdJettoJetMinDR_antiOLV[i], factor);
+		scale(_h_LeptonCentrality_antiOLV[i], factor);
+		scale(_h_DEtaJets_antiOLV[i], factor);
+		scale(_h_DEtaJets_DEta2more_antiOLV[i], factor);
+		scale(_h_DEtaJets_DEta2less_antiOLV[i], factor);
+		
 		scale(_h_WBosonPt_antiCJVantiOLV[i], factor);
 		scale(_h_WBosonEta_antiCJVantiOLV[i], factor);
 		scale(_h_WBosonPhi_antiCJVantiOLV[i], factor);
@@ -541,11 +649,18 @@ namespace Rivet {
 		scale(_h_WtoJetMinDEta_antiCJVantiOLV[i], factor);
 		scale(_h_WtoJetMinDR_antiCJVantiOLV[i], factor);
 		scale(_h_LeptoJetMinDR_antiCJVantiOLV[i], factor);
+		scale(_h_ThirdJettoJetMinDR_antiCJVantiOLV[i], factor);
+		scale(_h_LeptonCentrality_antiCJVantiOLV[i], factor);
+		scale(_h_DEtaJets_antiCJVantiOLV[i], factor);
 		//Dijet Mass Things
         scale(_h_DijetMassCR_antiCJV[i], factor);
         scale(_h_DijetMassCR_OLV[i], factor);
         scale(_h_DijetMassCR_antiOLV[i], factor);
 		scale(_h_DijetMassCR_antiCJVantiOLV[i], factor);
+		scale(_h_DijetMassCR_antiOLV_DEta2more[i], factor);
+		scale(_h_DijetMassCR_antiOLV_DEta2less[i], factor);
+		scale(_h_DijetMassCR_SR_DEta2more[i], factor);
+		scale(_h_DijetMassCR_SR_DEta2less[i], factor);
 		scale(_h_Mjj_0ex[i], factor);
 		scale(_h_Mjj_1ex[i], factor);
 		scale(_h_Mjj_2ex[i], factor);
@@ -562,6 +677,7 @@ namespace Rivet {
 		scale(_h_DijetMassCR_njetgap_g2[i], factor);
 		scale(_h_DijetMassCR_njetgap2_1in[i], factor);
 		scale(_h_DijetMassCR_njetgap_g3_1in[i], factor);
+		
         //scale(_h_PtBal_vs_BosonPt[i], factor);
         //normalize weightcutflow
       }
@@ -626,6 +742,7 @@ namespace Rivet {
     Histo1DPtr _h_AntiDijetPhiDiff_4jet[2];
 	Histo1DPtr _h_CutFlow[2];
     Histo1DPtr _h_WeightCutFlow[2];
+	
     Histo1DPtr _h_WBosonPt_SR[2];
 	Histo1DPtr _h_WBosonEta_SR[2];
 	Histo1DPtr _h_WBosonPhi_SR[2];
@@ -633,6 +750,12 @@ namespace Rivet {
 	Histo1DPtr _h_WtoJetMinDEta_SR[2];
 	Histo1DPtr _h_WtoJetMinDR_SR[2];
 	Histo1DPtr _h_LeptoJetMinDR_SR[2];
+	Histo1DPtr _h_ThirdJettoJetMinDR_SR[2];
+	Histo1DPtr _h_LeptonCentrality_SR[2];
+	Histo1DPtr _h_DEtaJets_SR[2];
+	Histo1DPtr _h_DEtaJets_DEta2more_SR[2];
+	Histo1DPtr _h_DEtaJets_DEta2less_SR[2];
+	
     Histo1DPtr _h_WBosonPt_antiCJV[2];
 	Histo1DPtr _h_WBosonEta_antiCJV[2];
 	Histo1DPtr _h_WBosonPhi_antiCJV[2];
@@ -640,6 +763,10 @@ namespace Rivet {
 	Histo1DPtr _h_WtoJetMinDEta_antiCJV[2];
 	Histo1DPtr _h_WtoJetMinDR_antiCJV[2];
 	Histo1DPtr _h_LeptoJetMinDR_antiCJV[2];
+	Histo1DPtr _h_ThirdJettoJetMinDR_antiCJV[2];
+	Histo1DPtr _h_LeptonCentrality_antiCJV[2];
+	Histo1DPtr _h_DEtaJets_antiCJV[2];
+	
     Histo1DPtr _h_WBosonPt_OLV[2];
 	Histo1DPtr _h_WBosonEta_OLV[2];
 	Histo1DPtr _h_WBosonPhi_OLV[2];
@@ -647,6 +774,10 @@ namespace Rivet {
 	Histo1DPtr _h_WtoJetMinDEta_OLV[2];
 	Histo1DPtr _h_WtoJetMinDR_OLV[2];
 	Histo1DPtr _h_LeptoJetMinDR_OLV[2];
+	Histo1DPtr _h_ThirdJettoJetMinDR_OLV[2];
+	Histo1DPtr _h_LeptonCentrality_OLV[2];
+	Histo1DPtr _h_DEtaJets_OLV[2];
+	
     Histo1DPtr _h_WBosonPt_antiOLV[2];
 	Histo1DPtr _h_WBosonEta_antiOLV[2];
 	Histo1DPtr _h_WBosonPhi_antiOLV[2];
@@ -654,6 +785,12 @@ namespace Rivet {
 	Histo1DPtr _h_WtoJetMinDEta_antiOLV[2];
 	Histo1DPtr _h_WtoJetMinDR_antiOLV[2];
 	Histo1DPtr _h_LeptoJetMinDR_antiOLV[2];
+	Histo1DPtr _h_ThirdJettoJetMinDR_antiOLV[2];
+	Histo1DPtr _h_LeptonCentrality_antiOLV[2];
+	Histo1DPtr _h_DEtaJets_antiOLV[2];
+	Histo1DPtr _h_DEtaJets_DEta2more_antiOLV[2];
+	Histo1DPtr _h_DEtaJets_DEta2less_antiOLV[2];
+	
 	Histo1DPtr _h_WBosonPt_antiCJVantiOLV[2];
 	Histo1DPtr _h_WBosonEta_antiCJVantiOLV[2];
 	Histo1DPtr _h_WBosonPhi_antiCJVantiOLV[2];
@@ -661,6 +798,9 @@ namespace Rivet {
 	Histo1DPtr _h_WtoJetMinDEta_antiCJVantiOLV[2];
 	Histo1DPtr _h_WtoJetMinDR_antiCJVantiOLV[2];
 	Histo1DPtr _h_LeptoJetMinDR_antiCJVantiOLV[2];
+	Histo1DPtr _h_ThirdJettoJetMinDR_antiCJVantiOLV[2];
+	Histo1DPtr _h_LeptonCentrality_antiCJVantiOLV[2];
+	Histo1DPtr _h_DEtaJets_antiCJVantiOLV[2];
 	
     Histo1DPtr _h_NJetsNoCuts;
 	Histo1DPtr _h_Mjj_0ex[2];
@@ -687,6 +827,10 @@ namespace Rivet {
 	Histo1DPtr _h_DijetMassCR_antiCJVantiOLV[2];
     Histo1DPtr _h_WeightWJets;
     Histo1DPtr _h_WeightInVBF;
+	Histo1DPtr _h_DijetMassCR_antiOLV_DEta2more[2];
+	Histo1DPtr _h_DijetMassCR_antiOLV_DEta2less[2];
+	Histo1DPtr _h_DijetMassCR_SR_DEta2more[2];
+	Histo1DPtr _h_DijetMassCR_SR_DEta2less[2];
 	Histo1DPtr _h_DijetMassCR_njetgap1[2];
 	Histo1DPtr _h_DijetMassCR_njetgap2[2];
 	Histo1DPtr _h_DijetMassCR_njetgap_g2[2];

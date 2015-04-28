@@ -1,6 +1,5 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/RivetAIDA.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/Thrust.hh"
@@ -9,10 +8,12 @@
 #include "Rivet/Projections/FParameter.hh"
 #include "Rivet/Projections/Hemispheres.hh"
 #include "Rivet/Tools/Logging.hh"
+#include "Rivet/Projections/WFinder.hh"
 
 namespace Rivet {
 
-
+  using namespace Cuts;
+  
   class EVENT_SHAPE_VAR : public Analysis {
   public:
 
@@ -25,39 +26,44 @@ namespace Rivet {
 		//Should I project out the things that should be vetoed from the fastjet calc?
 		//Probably not since I am not using an Identified Final State
 	    // Projections
-	    const FastJets jets(FinalState(-5.0, 5.0, 0.0*GeV), FastJets::ANTIKT, 0.6);
+        FinalState fs;
+        WFinder wfinder(fs, etaIn(-2.5, 2.5) & (pT >= 25.0*GeV), PID::MUON, 0.0*GeV, 100000000.0*GeV, 0.0*GeV, 0.2);
+        addProjection(wfinder, "WFinder");
+		
+	    const FastJets jets( wfinder.remainingFinalState(), FastJets::ANTIKT, 0.4);
+		//jets.useInvisibles();
 	    addProjection(jets, "Jets");
 
 	    // Book histograms
-	    _hist_Thrust_180_350  = bookHistogram1D("Thrust_180_350",20,0.0,1.0);
-	    _hist_ThrustM_180_350  = bookHistogram1D("ThrustMinor_180_350",20,0.0,1.0);
-		_hist_Spherocity_180_350 = bookHistogram1D("Spherocity_180_350",20,0.0,1.0);
-		_hist_Sphericity_180_350 = bookHistogram1D("Sphericity_180_350",20,0.0,1.0);
-		_hist_F_180_350 = bookHistogram1D("F_180_350",20,0.0,1.0);
-		_hist_Sum_Mass_180_350 = bookHistogram1D("Sum_Mass_180_350",20,0.0,1.0);
-		_hist_Heavy_Mass_180_350 = bookHistogram1D("Heavy_Mass_180_350",20,0.0,1.0);
-		_hist_Tot_Broadening_180_350 = bookHistogram1D("Tot_Broadening_180_350",20,0.0,1.0);
-		_hist_Wide_Broadening_180_350 = bookHistogram1D("Wide_Broadening_180_350",20,0.0,1.0);
+	    _hist_Thrust_180_350  = bookHisto1D("Thrust_180_350",20,0.0,1.0);
+	    _hist_ThrustM_180_350  = bookHisto1D("ThrustMinor_180_350",20,0.0,1.0);
+		_hist_Spherocity_180_350 = bookHisto1D("Spherocity_180_350",20,0.0,1.0);
+		_hist_Sphericity_180_350 = bookHisto1D("Sphericity_180_350",20,0.0,1.0);
+		_hist_F_180_350 = bookHisto1D("F_180_350",20,0.0,1.0);
+		_hist_Sum_Mass_180_350 = bookHisto1D("Sum_Mass_180_350",20,0.0,1.0);
+		_hist_Heavy_Mass_180_350 = bookHisto1D("Heavy_Mass_180_350",20,0.0,1.0);
+		_hist_Tot_Broadening_180_350 = bookHisto1D("Tot_Broadening_180_350",20,0.0,1.0);
+		_hist_Wide_Broadening_180_350 = bookHisto1D("Wide_Broadening_180_350",20,0.0,1.0);
 
-	    _hist_Thrust_350_750 = bookHistogram1D("Thrust_350_750",20,0.0,1.0);
-	    _hist_ThrustM_350_750 = bookHistogram1D("ThrustMinor_350_750",20,0.0,1.0);
-		_hist_Spherocity_350_750 = bookHistogram1D("Spherocity_350_750",20,0.0,1.0);
-		_hist_Sphericity_350_750 = bookHistogram1D("Sphericity_350_750",20,0.0,1.0);
-		_hist_F_350_750 = bookHistogram1D("F_350_750",20,0.0,1.0);
-		_hist_Sum_Mass_350_750 = bookHistogram1D("Sum_Mass_350_750",20,0.0,1.0);
-		_hist_Heavy_Mass_350_750 = bookHistogram1D("Heavy_Mass_350_750",20,0.0,1.0);
-		_hist_Tot_Broadening_350_750 = bookHistogram1D("Tot_Broadening_350_750",20,0.0,1.0);
-		_hist_Wide_Broadening_350_750 = bookHistogram1D("Wide_Broadening_350_750",20,0.0,1.0);
+	    _hist_Thrust_350_750 = bookHisto1D("Thrust_350_750",20,0.0,1.0);
+	    _hist_ThrustM_350_750 = bookHisto1D("ThrustMinor_350_750",20,0.0,1.0);
+		_hist_Spherocity_350_750 = bookHisto1D("Spherocity_350_750",20,0.0,1.0);
+		_hist_Sphericity_350_750 = bookHisto1D("Sphericity_350_750",20,0.0,1.0);
+		_hist_F_350_750 = bookHisto1D("F_350_750",20,0.0,1.0);
+		_hist_Sum_Mass_350_750 = bookHisto1D("Sum_Mass_350_750",20,0.0,1.0);
+		_hist_Heavy_Mass_350_750 = bookHisto1D("Heavy_Mass_350_750",20,0.0,1.0);
+		_hist_Tot_Broadening_350_750 = bookHisto1D("Tot_Broadening_350_750",20,0.0,1.0);
+		_hist_Wide_Broadening_350_750 = bookHisto1D("Wide_Broadening_350_750",20,0.0,1.0);
 
-	    _hist_Thrust_750_up = bookHistogram1D("Thrust_750_up",20,0.0,1.0);
-	    _hist_ThrustM_750_up = bookHistogram1D("ThrustMinor_750_up",20,0.0,1.0);
-		_hist_Spherocity_750_up = bookHistogram1D("Spherocity_750_up",20,0.0,1.0);
-		_hist_Sphericity_750_up = bookHistogram1D("Sphericity_750_up",20,0.0,1.0);
-		_hist_F_750_up = bookHistogram1D("F_750_up",20,0.0,1.0);
-		_hist_Sum_Mass_750_up = bookHistogram1D("Sum_Mass_750_up",20,0.0,1.0);
-		_hist_Heavy_Mass_750_up = bookHistogram1D("Heavy_Mass_750_up",20,0.0,1.0);
-		_hist_Tot_Broadening_750_up = bookHistogram1D("Tot_Broadening_750_up",20,0.0,1.0);
-		_hist_Wide_Broadening_750_up = bookHistogram1D("Wide_Broadening_750_up",20,0.0,1.0);
+	    _hist_Thrust_750_up = bookHisto1D("Thrust_750_up",20,0.0,1.0);
+	    _hist_ThrustM_750_up = bookHisto1D("ThrustMinor_750_up",20,0.0,1.0);
+		_hist_Spherocity_750_up = bookHisto1D("Spherocity_750_up",20,0.0,1.0);
+		_hist_Sphericity_750_up = bookHisto1D("Sphericity_750_up",20,0.0,1.0);
+		_hist_F_750_up = bookHisto1D("F_750_up",20,0.0,1.0);
+		_hist_Sum_Mass_750_up = bookHisto1D("Sum_Mass_750_up",20,0.0,1.0);
+		_hist_Heavy_Mass_750_up = bookHisto1D("Heavy_Mass_750_up",20,0.0,1.0);
+		_hist_Tot_Broadening_750_up = bookHisto1D("Tot_Broadening_750_up",20,0.0,1.0);
+		_hist_Wide_Broadening_750_up = bookHisto1D("Wide_Broadening_750_up",20,0.0,1.0);
 
     }
 
@@ -73,13 +79,11 @@ namespace Rivet {
 		double YStar = fabs(jets[0].momentum().rapidity()-jets[1].momentum().rapidity())/2;
 		double YBoost = (jets[0].momentum().rapidity()+jets[1].momentum().rapidity())/2;
 
-    	if (jets.size() < 2 ||
-			jets[0].momentum().pT() < 60.0*GeV ||
-			jets[1].momentum().pT() < 30.0*GeV ||
-			YStar > YStarMax ||
-			YBoost > YBoostMax) {
-				vetoEvent;
-		}
+    	if ( (jets.size() < 2) ||
+			 (jets[0].momentum().pT() < 60.0*GeV) ||
+			 (jets[1].momentum().pT() < 30.0*GeV) ||
+			 (YStar > YStarMax) ||
+			 (YBoost > YBoostMax) ) { vetoEvent; }
 
 
 		std::vector<Vector3> momenta;
@@ -108,9 +112,19 @@ namespace Rivet {
 		
 		Thrust thrust;
 		thrust.calc(momenta);						// Calculates thrust and thrust axis
+		//const double T = 1.0 - thrust.thrust();
+		//const double TM = thrust.thrustMajor();
+		
+		Sphericity sphericity;
+		sphericity.calc(momenta);
+		//const double Spheri = sphericity.transSphericity();
+		
 		Spherocity spherocity;
 		spherocity.calc(momenta);					// Calculates spherocity and spherocity axis
+		//const double Sphero = spherocity.transSpheroctity();
+		
 		Vector3 thrust_axis = thrust.axis1();		// Retrieves thrust axis
+		
 		// Define Sphericity, F-Parameter, Masses, Broadenings by hand.
 		
 		// Split the event in upper and lower hemispheres and prepare weights for jet broadenings.
@@ -240,68 +254,70 @@ namespace Rivet {
 	}
 
     void finalize() {
-		normalize(_hist_Thrust_180_350);
-		normalize(_hist_ThrustM_180_350);
-		normalize(_hist_Spherocity_180_350);
-		normalize(_hist_Sphericity_180_350);
-		normalize(_hist_F_180_350);
-		normalize(_hist_Sum_Mass_180_350);
-		normalize(_hist_Heavy_Mass_180_350);
-		normalize(_hist_Tot_Broadening_180_350);
-		normalize(_hist_Wide_Broadening_180_350);
+		double factor = crossSection()/sumOfWeights();
+		
+		scale(_hist_Thrust_180_350, factor);
+		scale(_hist_ThrustM_180_350, factor);
+		scale(_hist_Spherocity_180_350, factor);
+		scale(_hist_Sphericity_180_350, factor);
+		scale(_hist_F_180_350, factor);
+		scale(_hist_Sum_Mass_180_350, factor);
+		scale(_hist_Heavy_Mass_180_350, factor);
+		scale(_hist_Tot_Broadening_180_350, factor);
+		scale(_hist_Wide_Broadening_180_350, factor);
 
-		normalize(_hist_Thrust_350_750);
-		normalize(_hist_ThrustM_350_750);
-		normalize(_hist_Spherocity_350_750);
-		normalize(_hist_Sphericity_350_750);
-		normalize(_hist_F_350_750);
-		normalize(_hist_Sum_Mass_350_750);
-		normalize(_hist_Heavy_Mass_350_750);
-		normalize(_hist_Tot_Broadening_350_750);
-		normalize(_hist_Wide_Broadening_350_750);
+		scale(_hist_Thrust_350_750, factor);
+		scale(_hist_ThrustM_350_750, factor);
+		scale(_hist_Spherocity_350_750, factor);
+		scale(_hist_Sphericity_350_750, factor);
+		scale(_hist_F_350_750, factor);
+		scale(_hist_Sum_Mass_350_750, factor);
+		scale(_hist_Heavy_Mass_350_750, factor);
+		scale(_hist_Tot_Broadening_350_750, factor);
+		scale(_hist_Wide_Broadening_350_750, factor);
 
-		normalize(_hist_Thrust_750_up);
-		normalize(_hist_ThrustM_750_up);
-		normalize(_hist_Spherocity_750_up);
-		normalize(_hist_Sphericity_750_up);
-		normalize(_hist_F_750_up);
-		normalize(_hist_Sum_Mass_750_up);
-		normalize(_hist_Heavy_Mass_750_up);
-		normalize(_hist_Tot_Broadening_750_up);
-		normalize(_hist_Wide_Broadening_750_up);
+		scale(_hist_Thrust_750_up, factor);
+		scale(_hist_ThrustM_750_up, factor);
+		scale(_hist_Spherocity_750_up, factor);
+		scale(_hist_Sphericity_750_up, factor);
+		scale(_hist_F_750_up, factor);
+		scale(_hist_Sum_Mass_750_up, factor);
+		scale(_hist_Heavy_Mass_750_up, factor);
+		scale(_hist_Tot_Broadening_750_up, factor);
+		scale(_hist_Wide_Broadening_750_up, factor);
 	}
 
   private:
 	
-	AIDA::IHistogram1D *_hist_Thrust_180_350;
-    AIDA::IHistogram1D *_hist_ThrustM_180_350;
-	AIDA::IHistogram1D *_hist_Spherocity_180_350;
-    AIDA::IHistogram1D *_hist_Sphericity_180_350;
-	AIDA::IHistogram1D *_hist_F_180_350;
-	AIDA::IHistogram1D *_hist_Sum_Mass_180_350;
-	AIDA::IHistogram1D *_hist_Heavy_Mass_180_350;
-	AIDA::IHistogram1D *_hist_Tot_Broadening_180_350;
-	AIDA::IHistogram1D *_hist_Wide_Broadening_180_350;
+	Histo1DPtr _hist_Thrust_180_350;
+    Histo1DPtr _hist_ThrustM_180_350;
+	Histo1DPtr _hist_Spherocity_180_350;
+    Histo1DPtr _hist_Sphericity_180_350;
+	Histo1DPtr _hist_F_180_350;
+	Histo1DPtr _hist_Sum_Mass_180_350;
+	Histo1DPtr _hist_Heavy_Mass_180_350;
+	Histo1DPtr _hist_Tot_Broadening_180_350;
+	Histo1DPtr _hist_Wide_Broadening_180_350;
 
-    AIDA::IHistogram1D *_hist_Thrust_350_750;
-    AIDA::IHistogram1D *_hist_ThrustM_350_750;
-	AIDA::IHistogram1D *_hist_Spherocity_350_750;
-    AIDA::IHistogram1D *_hist_Sphericity_350_750;
-	AIDA::IHistogram1D *_hist_F_350_750;
-	AIDA::IHistogram1D *_hist_Sum_Mass_350_750;
-	AIDA::IHistogram1D *_hist_Heavy_Mass_350_750;
-	AIDA::IHistogram1D *_hist_Tot_Broadening_350_750;
-	AIDA::IHistogram1D *_hist_Wide_Broadening_350_750;
+    Histo1DPtr _hist_Thrust_350_750;
+    Histo1DPtr _hist_ThrustM_350_750;
+	Histo1DPtr _hist_Spherocity_350_750;
+    Histo1DPtr _hist_Sphericity_350_750;
+	Histo1DPtr _hist_F_350_750;
+	Histo1DPtr _hist_Sum_Mass_350_750;
+	Histo1DPtr _hist_Heavy_Mass_350_750;
+	Histo1DPtr _hist_Tot_Broadening_350_750;
+	Histo1DPtr _hist_Wide_Broadening_350_750;
 
-    AIDA::IHistogram1D *_hist_Thrust_750_up;
-    AIDA::IHistogram1D *_hist_ThrustM_750_up;
-	AIDA::IHistogram1D *_hist_Spherocity_750_up;
-    AIDA::IHistogram1D *_hist_Sphericity_750_up;
-	AIDA::IHistogram1D *_hist_F_750_up;
-	AIDA::IHistogram1D *_hist_Sum_Mass_750_up;
-	AIDA::IHistogram1D *_hist_Heavy_Mass_750_up;
-	AIDA::IHistogram1D *_hist_Tot_Broadening_750_up;
-	AIDA::IHistogram1D *_hist_Wide_Broadening_750_up;
+    Histo1DPtr _hist_Thrust_750_up;
+    Histo1DPtr _hist_ThrustM_750_up;
+	Histo1DPtr _hist_Spherocity_750_up;
+    Histo1DPtr _hist_Sphericity_750_up;
+	Histo1DPtr _hist_F_750_up;
+	Histo1DPtr _hist_Sum_Mass_750_up;
+	Histo1DPtr _hist_Heavy_Mass_750_up;
+	Histo1DPtr _hist_Tot_Broadening_750_up;
+	Histo1DPtr _hist_Wide_Broadening_750_up;
 
   };
 

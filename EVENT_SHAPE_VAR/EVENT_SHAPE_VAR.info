@@ -11,7 +11,7 @@ RunInfo:
   pp QCD interactions at 7000 GeV.
 NumEvents: 1000000000
 Beams: [p+, p+]
-Energies: [7000]
+Energies: [8000]
 PtCuts: [30.0]
 Description:
    Central transverse Thrust, Thrust Minor, Spherocity, and Sphericity have 

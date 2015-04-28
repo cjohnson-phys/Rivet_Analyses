@@ -38,7 +38,7 @@ namespace Rivet {
     void init() {
 
       FinalState fs;
-      WFinder wfinder(fs, etaIn(-2.5, 2.5) & (pT >= 25.0*GeV), PID::MUON, 60.0*GeV, 100.0*GeV, 0*GeV, 0.2);
+      WFinder wfinder(fs, etaIn(-2.5, 2.5) & (pT >= 25.0*GeV), PID::MUON, 0.0*GeV, 100000000.0*GeV, 0*GeV, 0.2);
       addProjection(wfinder, "WFinder");
       
       FastJets jets( wfinder.remainingFinalState() , FastJets::ANTIKT, 0.4);
@@ -82,7 +82,7 @@ namespace Rivet {
       vector<FourMomentum> jets;
       foreach (const Jet& jet, jetpro.jetsByPt(30.0*GeV)) {
           if ( fabs(jet.momentum().rapidity()) > 4.4 ) continue;
-          //if ( fabs(deltaR(jet, lepton)) < 0.3 ) continue;
+          if ( fabs(deltaR(jet, lepton)) < 0.3 ) continue;
           jets.push_back(jet.momentum());
       }
 	  

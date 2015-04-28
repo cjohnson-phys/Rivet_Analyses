@@ -274,9 +274,9 @@ LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/ThirdZep_3jet_[12]
-Title=Third Jet Rest Frame Pseudorapidity ($W+\geq 3$ jets)
-XLabel=$\eta_{z,3}$(Third Jet)
-YLabel=d$\sigma$/d$\eta_{z,3}$ [pb]
+Title=Third Jet Rest Frame Rapidity ($W+\geq 3$ jets)
+XLabel=$y_{z,3}$(Third Jet)
+YLabel=d$\sigma$/d$y_{z,3}$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
@@ -284,9 +284,9 @@ LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/ThirdZep_4jet_[12]
-Title=Third Jet Rest Frame Pseudorapidity ($W+\geq 4$ jets)
-XLabel=$\eta_{z,3}$(Third Jet)
-YLabel=d$\sigma$/d$\eta_{z,3}$ [pb]
+Title=Third Jet Rest Frame Rapidity ($W+\geq 4$ jets)
+XLabel=$y_{z,3}$(Third Jet)
+YLabel=d$\sigma$/d$y_{z,3}$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
@@ -294,9 +294,9 @@ LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/FourthZep_4jet_[12]
-Title=Fourth Jet Rest Frame Pseudorapidity ($W+\geq 4$ jets)
-XLabel=$\eta_{z,4}$(Fourth Jet)
-YLabel=d$\sigma$/d$\eta_{z,4}$ [pb]
+Title=Fourth Jet Rest Frame Rapidity ($W+\geq 4$ jets)
+XLabel=$y_{z,4}$(Fourth Jet)
+YLabel=d$\sigma$/d$y_{z,4}$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
@@ -304,9 +304,9 @@ LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/AntiDijetEtaDiff_2jet_[12]
-Title=Pseudorapidity Diff b/w Most Forward-Rearward Jets ($W+\geq 2$ jets)
-XLabel=$\Delta\eta_{j_1j_2}$
-YLabel=d$\sigma$/d$\eta_{j_1j_2}$ [pb]
+Title=Rapidity Diff b/w Most Forward-Rearward Jets ($W+\geq 2$ jets)
+XLabel=$\Delta y_{j_1j_2}$
+YLabel=d$\sigma$/d$y_{j_1j_2}$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
@@ -314,9 +314,9 @@ LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/AntiDijetEtaDiff_3jet_[12]
-Title=Pseudorapidity Diff b/w Most Forward-Rearward Jets ($W+\geq 3$ jets)
+Title=Rapidity Diff b/w Most Forward-Rearward Jets ($W+\geq 3$ jets)
 XLabel=$/Delta/eta_{j_1j_2}$
-YLabel=d$\sigma$/d$\eta_{j_1j_2}$ [pb]
+YLabel=d$\sigma$/d$y_{j_1j_2}$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
@@ -324,9 +324,9 @@ LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/AntiDijetEtaDiff_4jet_[12]
-Title=Pseudorapidity Diff b/w Most Forward-Rearward Jets ($W+\geq 4$ jets)
+Title=Rapidity Diff b/w Most Forward-Rearward Jets ($W+\geq 4$ jets)
 XLabel=$/Delta/eta_{j_1j_2}$
-YLabel=d$\sigma$/d$\eta_{j_1j_2}$ [pb]
+YLabel=d$\sigma$/d$y_{j_1j_2}$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
@@ -545,8 +545,8 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/DijetMass_CR_antiJ3C_[12]
-Title=Dijet Mass in !J3C
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/DijetMass_CR_antiCJV_[12]
+Title=Dijet Mass in !CJV
 XLabel=$m_{jj}$ [GeV]
 YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
 LogY=0
@@ -555,8 +555,8 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/DijetMass_CR_LC_[12]
-Title=Dijet Mass in LC Region but Pre-J3C
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/DijetMass_CR_OLV_[12]
+Title=Dijet Mass in OLV Region but Pre-CJV
 XLabel=$m_{jj}$ [GeV]
 YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
 LogY=0
@@ -565,8 +565,18 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/DijetMass_CR_antiLC_[12]
-Title=Dijet Mass in !LC Region but Post-J3C
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/DijetMass_CR_antiOLV_[12]
+Title=Dijet Mass in !OLV Region but Post-CJV
+XLabel=$m_{jj}$ [GeV]
+YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/DijetMass_CR_antiCJVantiOLV_[12]
+Title=Dijet Mass in !BOTH Region
 XLabel=$m_{jj}$ [GeV]
 YLabel=d$\sigma$/d$m_{jj}$ [pb/GeV]
 LogY=0
@@ -606,9 +616,9 @@ LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonEta_SR_[12]
-Title=W Boson Pseudorapidity
-XLabel=$W(\eta)$
-YLabel=d$\sigma$/d$\eta$ [pb]
+Title=W Boson Rapidity
+XLabel=$W(y)$
+YLabel=d$\sigma$/d$y$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
@@ -626,8 +636,8 @@ LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDPhi_SR_[12]
-Title=Minimum $\Delta\phi$ - Lepton to Jet
-XLabel=$\Delta\phi (l,jet)$
+Title=Minimum $\Delta\phi$ - W Boson to Jet
+XLabel=$\Delta\phi (W,jet)$
 YLabel=d$\sigma$/d$\Delta\phi$ [pb]
 LogY=0
 RatioPlotYMin=0.5
@@ -635,10 +645,10 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinEta_SR_[12]
-Title=Minimum $\Delta\eta$ - Lepton to Jet
-XLabel=$W\Delta\eta (l,jet)$
-YLabel=d$\sigma$/d$\Delta\eta$ [pb]
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDEta_SR_[12]
+Title=Minimum $\Delta y$ - W Boson to Jet
+XLabel=$W\Delta y (W,jet)$
+YLabel=d$\sigma$/d$\Delta y$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
@@ -646,9 +656,9 @@ LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDR_SR_[12]
-Title=Minimum $\DeltaR$ - Lepton to Jet
-XLabel=$\DeltaR (l,jet)$
-YLabel=d$\sigma$/d$\DeltaR$ [pb]
+Title=Minimum $\Delta R$ - W Boson to Jet
+XLabel=$\Delta R (W,jet)$
+YLabel=d$\sigma$/d$\Delta R$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
@@ -666,9 +676,9 @@ LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonEta_antiCJV_[12]
-Title=W Boson Pseudorapidity
-XLabel=$W(\eta)$
-YLabel=d$\sigma$/d$\eta$ [pb]
+Title=W Boson Rapidity
+XLabel=$W(y)$
+YLabel=d$\sigma$/d$y$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
@@ -686,8 +696,8 @@ LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDPhi_antiCJV_[12]
-Title=Minimum $\Delta\phi$ - Lepton to Jet
-XLabel=$\Delta\phi (l,jet)$
+Title=Minimum $\Delta\phi$ - W Boson to Jet
+XLabel=$\Delta\phi (W,jet)$
 YLabel=d$\sigma$/d$\Delta\phi$ [pb]
 LogY=0
 RatioPlotYMin=0.5
@@ -695,10 +705,10 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinEta_antiCJV_[12]
-Title=Minimum $\Delta\eta$ - Lepton to Jet
-XLabel=$W\Delta\eta (l,jet)$
-YLabel=d$\sigma$/d$\Delta\eta$ [pb]
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDEta_antiCJV_[12]
+Title=Minimum $\Delta y$ - W Boson to Jet
+XLabel=$W\Delta y (W,jet)$
+YLabel=d$\sigma$/d$\Delta y$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
@@ -706,9 +716,9 @@ LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDR_antiCJV_[12]
-Title=Minimum $\DeltaR$ - Lepton to Jet
-XLabel=$\DeltaR (l,jet)$
-YLabel=d$\sigma$/d$\DeltaR$ [pb]
+Title=Minimum $\Delta R$ - W Boson to Jet
+XLabel=$\Delta R (W,jet)$
+YLabel=d$\sigma$/d$\Delta R$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
@@ -726,9 +736,9 @@ LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonEta_OLV_[12]
-Title=W Boson Pseudorapidity
-XLabel=$W(\eta)$
-YLabel=d$\sigma$/d$\eta$ [pb]
+Title=W Boson Rapidity
+XLabel=$W(y)$
+YLabel=d$\sigma$/d$y$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
@@ -746,8 +756,8 @@ LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDPhi_OLV_[12]
-Title=Minimum $\Delta\phi$ - Lepton to Jet
-XLabel=$\Delta\phi (l,jet)$
+Title=Minimum $\Delta\phi$ - W Boson to Jet
+XLabel=$\Delta\phi (W,jet)$
 YLabel=d$\sigma$/d$\Delta\phi$ [pb]
 LogY=0
 RatioPlotYMin=0.5
@@ -755,10 +765,10 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinEta_OLV_[12]
-Title=Minimum $\Delta\eta$ - Lepton to Jet
-XLabel=$W\Delta\eta (l,jet)$
-YLabel=d$\sigma$/d$\Delta\eta$ [pb]
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDEta_OLV_[12]
+Title=Minimum $\Delta y$ - W Boson to Jet
+XLabel=$W\Delta y (W,jet)$
+YLabel=d$\sigma$/d$\Delta y$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
@@ -766,9 +776,9 @@ LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDR_OLV_[12]
-Title=Minimum $\DeltaR$ - Lepton to Jet
-XLabel=$\DeltaR (l,jet)$
-YLabel=d$\sigma$/d$\DeltaR$ [pb]
+Title=Minimum $\Delta R$ - W Boson to Jet
+XLabel=$\Delta R (W,jet)$
+YLabel=d$\sigma$/d$\Delta R$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
@@ -786,9 +796,9 @@ LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonEta_antiOLV_[12]
-Title=W Boson Pseudorapidity
-XLabel=$W(\eta)$
-YLabel=d$\sigma$/d$\eta$ [pb]
+Title=W Boson Rapidity
+XLabel=$W(y)$
+YLabel=d$\sigma$/d$y$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
@@ -806,8 +816,8 @@ LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDPhi_antiOLV_[12]
-Title=Minimum $\Delta\phi$ - Lepton to Jet
-XLabel=$\Delta\phi (l,jet)$
+Title=Minimum $\Delta\phi$ - W Boson to Jet
+XLabel=$\Delta\phi (W,jet)$
 YLabel=d$\sigma$/d$\Delta\phi$ [pb]
 LogY=0
 RatioPlotYMin=0.5
@@ -815,10 +825,10 @@ RatioPlotYMax=1.5
 LegendXPos=0.05
 # END PLOT
 
-# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinEta_antiOLV_[12]
-Title=Minimum $\Delta\eta$ - Lepton to Jet
-XLabel=$W\Delta\eta (l,jet)$
-YLabel=d$\sigma$/d$\Delta\eta$ [pb]
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDEta_antiOLV_[12]
+Title=Minimum $\Delta y$ - W Boson to Jet
+XLabel=$W\Delta y (W,jet)$
+YLabel=d$\sigma$/d$\Delta y$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5
@@ -826,9 +836,119 @@ LegendXPos=0.05
 # END PLOT
 
 # BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDR_antiOLV_[12]
-Title=Minimum $\DeltaR$ - Lepton to Jet
-XLabel=$\DeltaR (l,jet)$
-YLabel=d$\sigma$/d$\DeltaR$ [pb]
+Title=Minimum $\Delta R$ - W Boson to Jet
+XLabel=$\Delta R (W,jet)$
+YLabel=d$\sigma$/d$\Delta R$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonPt_antiCJVantiOLV_[12]
+Title=W Boson Transverse Momentum
+XLabel=$W(p_T)$ [GeV]
+YLabel=d$\sigma$/d$p_T$ [pb/GeV]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonEta_antiCJVantiOLV_[12]
+Title=W Boson Rapidity
+XLabel=$W(y)$
+YLabel=d$\sigma$/d$y$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WBosonPhi_antiCJVantiOLV_[12]
+Title=W Boson Azimuthal Angle
+XLabel=$W(\phi)$
+YLabel=d$\sigma$/d$\phi$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDPhi_antiCJVantiOLV_[12]
+Title=Minimum $\Delta\phi$ - W Boson to Jet
+XLabel=$\Delta\phi (W,jet)$
+YLabel=d$\sigma$/d$\Delta\phi$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDEta_antiCJVantiOLV_[12]
+Title=Minimum $\Delta y$ - W Boson to Jet
+XLabel=$W\Delta y (W,jet)$
+YLabel=d$\sigma$/d$\Delta y$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/WtoJetMinDR_antiCJVantiOLV_[12]
+Title=Minimum $\Delta R$ - W Boson to Jet
+XLabel=$\Delta R (W,jet)$
+YLabel=d$\sigma$/d$\Delta R$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/LeptoJetMinDR_SR_[12]
+Title=Minimum $\Delta R$ - Lepton to Jet
+XLabel=$\Delta R (l,jet)$
+YLabel=d$\sigma$/d$\Delta R$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/LeptoJetMinDR_antiCJV_[12]
+Title=Minimum $\Delta R$ - Lepton to Jet
+XLabel=$\Delta R (l,jet)$
+YLabel=d$\sigma$/d$\Delta R$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/LeptoJetMinDR_OLV_[12]
+Title=Minimum $\Delta R$ - Lepton to Jet
+XLabel=$\Delta R (l,jet)$
+YLabel=d$\sigma$/d$\Delta R$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/LeptoJetMinDR_antiOLV_[12]
+Title=Minimum $\Delta R$ - Lepton to Jet
+XLabel=$\Delta R (l,jet)$
+YLabel=d$\sigma$/d$\Delta R$ [pb]
+LogY=0
+RatioPlotYMin=0.5
+RatioPlotYMax=1.5
+LegendXPos=0.05
+# END PLOT
+
+# BEGIN PLOT /WJETS_SYST_NEWANALYSIS/LeptoJetMinDR_antiCJVantiOLV_[12]
+Title=Minimum $\Delta R$ - Lepton to Jet
+XLabel=$\Delta R (l,jet)$
+YLabel=d$\sigma$/d$\Delta R$ [pb]
 LogY=0
 RatioPlotYMin=0.5
 RatioPlotYMax=1.5

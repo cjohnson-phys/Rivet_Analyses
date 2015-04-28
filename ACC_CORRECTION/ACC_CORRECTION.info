@@ -11,7 +11,7 @@ RunInfo:
   W+jet events in either the electron or the muon decay channel (but not both).
 NumEvents: 500000
 Beams: [p+, p+]
-Energies: [8000]
+Energies: [7000]
 PtCuts: [0]
 NeedCrossSection: True
 Description:
