@@ -282,8 +282,10 @@ namespace Rivet {
       _h_CutFlow[0]->fill(6.0);
       _h_WeightCutFlow[0]->fill(6.0,weight);
 	  
-	  // double DeltaRap = fabs(jets[0].rapidity() - jets[1].rapidity());
-	  // if ( DeltaRap > 2.0 ) vetoEvent;
+	  double DeltaRap = fabs(jets[0].rapidity() - jets[1].rapidity());
+	  if ( DeltaRap < 2.0 ) vetoEvent;
+      _h_CutFlow[0]->fill(7.0);
+      _h_WeightCutFlow[0]->fill(7.0,weight);
       
 	  double Wjet1Dphi = fabs(boson.phi() - jets[0].phi());
 	  double Wjet1Deta = fabs(boson.rapidity() - jets[0].rapidity());
@@ -303,9 +305,9 @@ namespace Rivet {
         double jet_1_eta = jets[0].rapidity();
         double jet_2_eta = jets[1].rapidity();
 		
-		bool passDEtaCut = false;
-		double DeltaRap = fabs(jet_1_eta - jet_2_eta);
-		if ( DeltaRap > 2.0 ) { passDEtaCut = true; }
+		// bool passDEtaCut = false;
+		// double DeltaRap = fabs(jet_1_eta - jet_2_eta);
+		// if ( DeltaRap > 2.0 ) { passDEtaCut = true; }
 		
 		// Njets in Gap Control Regions info
 	    int njetsingap = 0;
@@ -352,14 +354,14 @@ namespace Rivet {
 					Jets32DR = deltaR(jets[1],jets[2]);
 					_h_ThirdJettoJetMinDR_antiOLV[i]->fill( (Jets31DR<Jets32DR ? Jets31DR : Jets32DR), weight);
 				}
-				if (passDEtaCut) {
-					_h_DijetMassCR_antiOLV_DEta2more[i]->fill(dijet_mass, weight);
-					_h_DEtaJets_DEta2more_antiOLV[i]->fill(DeltaRap, weight);
-				}
-				else {
-					_h_DijetMassCR_antiOLV_DEta2less[i]->fill(dijet_mass, weight);
-					_h_DEtaJets_DEta2less_antiOLV[i]->fill(DeltaRap, weight);
-				}
+				// if (passDEtaCut) {
+				// 	_h_DijetMassCR_antiOLV_DEta2more[i]->fill(dijet_mass, weight);
+				// 	_h_DEtaJets_DEta2more_antiOLV[i]->fill(DeltaRap, weight);
+				// }
+				// else {
+				// 	_h_DijetMassCR_antiOLV_DEta2less[i]->fill(dijet_mass, weight);
+				// 	_h_DEtaJets_DEta2less_antiOLV[i]->fill(DeltaRap, weight);
+				// }
 			}
 			else {
 				_h_DijetMassCR_antiCJVantiOLV[i]->fill(dijet_mass,weight);
@@ -397,12 +399,12 @@ namespace Rivet {
 			_h_ThirdJettoJetMinDR_OLV[i]->fill( (Jets31DR<Jets32DR ? Jets31DR : Jets32DR), weight);
 		}
 		
-        _h_CutFlow[i]->fill(7.0);
-        _h_WeightCutFlow[i]->fill(7.0,weight);
+        _h_CutFlow[i]->fill(8.0);
+        _h_WeightCutFlow[i]->fill(8.0,weight);
         
         if ( passJet3Centrality ) {
-            _h_CutFlow[i]->fill(8.0);
-            _h_WeightCutFlow[i]->fill(8.0,weight);
+            _h_CutFlow[i]->fill(9.0);
+            _h_WeightCutFlow[i]->fill(9.0,weight);
         }
         else {
             _h_DijetMassCR_antiCJV[i]->fill(dijet_mass, weight);
@@ -449,14 +451,14 @@ namespace Rivet {
 			Jets32DR = deltaR(jets[1],jets[2]);
 			_h_ThirdJettoJetMinDR_SR[i]->fill( (Jets31DR<Jets32DR ? Jets31DR : Jets32DR), weight);
 		}
-		if (passDEtaCut) {
-			_h_DijetMassCR_SR_DEta2more[i]->fill(dijet_mass, weight);
-			_h_DEtaJets_DEta2more_SR[i]->fill(DeltaRap, weight);
-		}
-		else {
-			_h_DijetMassCR_SR_DEta2less[i]->fill(dijet_mass, weight);
-			_h_DEtaJets_DEta2less_SR[i]->fill(DeltaRap, weight);
-		}
+		// if (passDEtaCut) {
+		// 	_h_DijetMassCR_SR_DEta2more[i]->fill(dijet_mass, weight);
+		// 	_h_DEtaJets_DEta2more_SR[i]->fill(DeltaRap, weight);
+		// }
+		// else {
+		// 	_h_DijetMassCR_SR_DEta2less[i]->fill(dijet_mass, weight);
+		// 	_h_DEtaJets_DEta2less_SR[i]->fill(DeltaRap, weight);
+		// }
         //_h_PtBal_vs_BosonPt[i]->fill(boson.pT(),pTbalance,weight);
 		
 		if (jets.size()==0) _h_Mjj_0ex[i]->fill(dijet_mass, weight);
